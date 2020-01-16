@@ -32,7 +32,7 @@ def painel():
 clear = lambda: os.system('clear')
 
 #criando a lista de valores
-lista =[]
+lista = []
 
 #loop infinito e votação
 while True:
