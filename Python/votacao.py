@@ -19,22 +19,22 @@ Após os dados terem sido completamente informados, o programa deverá calcular 
 O formato da saída foi dado pela empresa, e é o seguinte:
 
 '''
-#importanto os para clear
+# importanto os para clear
 import os 
 
-#criando o painel
+# criando o painel
 
 def painel():
     print('VOTAÇÃO DE MELHOR OS')
     print('1 - Windows\n2 - Unix\n3 - Linux\n4 - Netware\n5 - MacOS\n6 - Outro\n0 - Sair')
 
-#criando o sistema para clear()
+# criando o sistema para clear()
 clear = lambda: os.system('clear')
 
-#criando a lista de valores
+# criando a lista de valores
 lista = []
 
-#loop infinito e votação
+# loop infinito e votação
 while True:
     clear()
     painel()
@@ -58,17 +58,17 @@ while True:
         print('Não é possível outros valores além dos listados. Presione ENTER.', end = '')
         input()
 
-#fornecendo os resultados
+# fornecendo os resultados
 print(f'\nRESULTADO Total de votos {len(lista)}.\n ')
 
-#definindo o vencedor
+# definindo o vencedor
 i = 1
 vencedor = []
 while i <=6:
 	vencedor.append(lista.count(i))
 	i += 1
 i = vencedor.index(max(vencedor)) + 1
-#fornecendo o resultado
+# fornecendo o resultado
 if i == 1:
     print(f'O Sistema Operacional mais votado foi o Windows, com {lista.count(1)} votos, correspondendo a {int(lista.count(1)*100/len(lista))}% dos votos.')
 elif i == 2:
