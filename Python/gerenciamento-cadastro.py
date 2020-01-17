@@ -56,10 +56,12 @@ def cadastrar():
 
 # método de deleção de pessoas do cadastro
 def deletar():
+    clear()
     while True:
         cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
         if cpf in pessoas.keys(): # verificação se há ou não o cadastro do cpf, caso True será, após confirmação, excluído
-            print(f'Nome: {pessoas[cpf][0]}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}')
+            clear()
+            print(f'Nome: {pessoas[cpf][0]}\nCPF: {cpf}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}\n')
             escolha = input('Deseja mesmo excluir esta pessoa (s/n)? ')
             if escolha == 's':
                 pessoas.pop(cpf)
@@ -76,10 +78,12 @@ def deletar():
                 break
 
 def alterar():
+    clear()
     while True:
         cpf = int(input('Digite o CPF da pessoa que deseja alterar: '))
         if cpf in pessoas.keys(): # verificação se há ou não o cadastro do cpf, caso True será, após confirmação, editado
-            print(f'Nome: {pessoas[cpf][0]}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}')
+            clear()
+            print(f'Nome: {pessoas[cpf][0]}\nCPF: {cpf}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}\n')
             escolha = input('Deseja mesmo editar esta pessoa (s/n)? ') 
             if escolha == 's':
 # escolha do atributo a ser alterado
@@ -125,6 +129,7 @@ def alterar():
 
 # método para consultar pessoas no cadastro e outras informações 
 def consultar():
+    clear()
     escolha = int(input('1 - Cadastros\n2 - Número de cadastrados\n3 - Consulta específica\nDigite uma das opções acima: '))
     if escolha == 1:
         clear()
@@ -134,14 +139,14 @@ def consultar():
     elif escolha == 2:
         clear()
         print(f"QUANTIDADES\nPessoas cadastradas: {len(pessoas)}\nMaiores de idade: {dados['maioridade']}\nHomens: {dados['homens']}")
-        print(f"Mulheres: {dados['mulheres']}\nVIP: {dados['vip']}\nCamarote: {dados['camarote']}\nPista: {dados['pista']}")
+        print(f"Mulheres: {dados['mulheres']}\nVIP: {dados['vip']}\nCamarote: {dados['camarote']}\nPista: {dados['pista']}\n")
         input('Pressione Enter para retornar ao gerenciamento.')
     elif escolha == 3:
         clear()
         cpf = int(input('Digite o CPF: '))
         if cpf in pessoas.keys(): # verificação se há ou não o cadastro do cpf, caso True será, após confirmação, editado
             clear()
-            print(f'Nome: {pessoas[cpf][0]}\nCPF: {cpf}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}')
+            print(f'Nome: {pessoas[cpf][0]}\nCPF: {cpf}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}\n')
             input('Fim da consulta. Pressione Enter.')
         else:
             input('Este CPF não consta no cadastro. Pressione Enter.')
