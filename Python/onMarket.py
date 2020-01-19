@@ -95,18 +95,26 @@ def carrinho(): # método para consulta e exclusão de itens no carrinho
         clear()
         compra()
     elif escolha == 3:
+        clear()
+        for prod in car:
+                print(f'Nome: {prod[0].capitalize()}\nMarca: {prod[1]}\nQuantidade: {prod[3]}\nPreço: {prod[2]}\n')
         prod = input('Digite o nome do produto que deseja retirar da lista: ')
         clear()
         for i in range(len(car)):
             if car[i][0] == prod:
                 print(f'Nome: {car[i][0].capitalize()}\nMarca: {car[i][1]}\nQuantidade: {car[i][3]}\nPreço: {car[i][2]}\n')
-                escolha = input('Deseja mesmo retirar este produto? ')
+                escolha = input('Deseja mesmo retirar este produto (s/n)? ')
                 if escolha == 's':
                     car.pop(i)
+                    clear()
                     input('Produto retirado com sucesso. Pressione Enter.')
+                    return
                 else:
+                    clear()
                     input('Produto mantido. Pressione Enter.')
-                break
+                return
+        clear()
+        input('Este produto não consta na lista. Pressione Enter.')
 
 while True:
     compra()
