@@ -87,17 +87,4 @@ int consultafila(fila *fi, struct aluno *al){
 
 int main(){
     fila *fi=criafila();
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
