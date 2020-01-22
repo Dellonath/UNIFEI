@@ -33,7 +33,7 @@ def painel(): # método para saída de produtos
     print('Bem-vindo ao onMarket, boas compras!!! :D')
     print('____________________________________________________\n\n')
     for prod in produtos.keys():
-        print(f'\nNome: {prod.capitalize()}\nMarca: {produtos[prod][1]}\nQuantidade Disponivel: {produtos[prod][2]}\nR${produtos[prod][0]}')
+        print(f'\nNome: {prod.title()}\nMarca: {produtos[prod][1]}\nQuantidade Disponivel: {produtos[prod][2]}\nR${produtos[prod][0]}')
     print('\n')
 
 def compra():
@@ -48,7 +48,7 @@ def compra():
         sys.exit()
     else:
         if prod in produtos.keys() and produtos[prod][2] != 0:
-            print(f'Nome: {prod.capitalize()}\nMarca: {produtos[prod][1]}\nQuantidade Disponivel: {produtos[prod][2]}\nPreço: {produtos[prod][0]}')
+            print(f'Nome: {prod.title()}\nMarca: {produtos[prod][1]}\nQuantidade Disponivel: {produtos[prod][2]}\nPreço: {produtos[prod][0]}')
             escolha = input('\nDeseja mesmo comprar este produto (s/n)? ')
             if escolha == 's': # confirmação de compra
                 qtd = int(input('Insira a quantidade desejada: '))
@@ -84,7 +84,7 @@ def carrinho(): # método para consulta e exclusão de itens no carrinho
         else:
             clear()
             for prod in car:
-                print(f'Nome: {prod[0].capitalize()}\nMarca: {prod[1]}\nQuantidade: {prod[3]}\nPreço: {prod[2]}\n')
+                print(f'Nome: {prod[0].title()}\nMarca: {prod[1]}\nQuantidade: {prod[3]}\nPreço: {prod[2]}\n')
             print(f'\nNúmero de produtos: {len(car)}')
             soma = 0
             for i in range(len(car)):
@@ -97,12 +97,12 @@ def carrinho(): # método para consulta e exclusão de itens no carrinho
     elif escolha == 3:
         clear()
         for prod in car:
-                print(f'Nome: {prod[0].capitalize()}\nMarca: {prod[1]}\nQuantidade: {prod[3]}\nPreço: {prod[2]}\n')
+                print(f'Nome: {prod[0].title()}\nMarca: {prod[1]}\nQuantidade: {prod[3]}\nPreço: {prod[2]}\n')
         prod = input('Digite o nome do produto que deseja retirar da lista: ')
         clear()
         for i in range(len(car)):
             if car[i][0] == prod:
-                print(f'Nome: {car[i][0].capitalize()}\nMarca: {car[i][1]}\nQuantidade: {car[i][3]}\nPreço: {car[i][2]}\n')
+                print(f'Nome: {car[i][0].title()}\nMarca: {car[i][1]}\nQuantidade: {car[i][3]}\nPreço: {car[i][2]}\n')
                 escolha = input('Deseja mesmo retirar este produto (s/n)? ')
                 if escolha == 's':
                     car.pop(i)
