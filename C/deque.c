@@ -107,9 +107,9 @@ void palindromo(){
 }
 
 int main(){
-	deque *deq, *auxiliar;
-	char c;
-	int i=1, escolha=10;
+    deque *deq, *auxiliar;
+    char c;
+    int i=1, escolha=10;
 	
     printf("Com qual letra deseja iniciar o DEQUE? ");
     scanf(" %c", &c);
