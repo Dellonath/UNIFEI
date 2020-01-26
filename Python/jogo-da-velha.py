@@ -29,7 +29,7 @@ def jog1(): # método para vitória do jogar 1
     global cont # tomando o cont global
     global tab # tomando o tab global
     tabuleiro(tab)
-    a = input('JOGADOR 1 VENCEU O JOGO!! Jogar novamente (s/n)? ')
+    a = input('JOGADOR 1 VENCEU O JOGO!!! Jogar novamente (s/n)? ')
     if a == 's':
         cont = 0
         tab = [['*' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
@@ -44,7 +44,7 @@ def jog2():
     global cont # tomando o cont global
     global tab # tomando o tab global
     tabuleiro(tab)
-    a = input('JOGADOR 2 VENCEU O JOGO!! Jogar novamente (s/n)? ')
+    a = input('JOGADOR 2 VENCEU O JOGO!!! Jogar novamente (s/n)? ')
     if a == 's':
         cont = 0
         tab = [['*' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
@@ -196,7 +196,8 @@ while True:
 
     if cont == 9:
         clear()
-        a = input('EMPATE!!. Jogar novamente (s/n)? ')
+        tabuleiro(tab)
+        a = input('EMPATE!!! Jogar novamente (s/n)? ')
         if a == 's':
             cont = 0
             tab = [['*' for i in range(3)] for num in range(3)]
