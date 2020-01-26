@@ -4,7 +4,7 @@ Jogo da velha
 
 import time # import para time.sleep()
 import os # import para clear()
-import sys
+import sys # import para sys.exit()
 
 clear = lambda: os.system('clear') # script para clear()
 
