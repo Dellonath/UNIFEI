@@ -9,7 +9,8 @@ import sys
 clear = lambda: os.system('clear') # script para clear()
 
 def painel(): # função desnecessária, apenas para usar o time.sleep() de uma forma diferente e guardar a sintaxe do mesmo
-    for a in range(4):
+    clear()
+    for a in range(3):
         print('JOGO DA VELHA')
         time.sleep(0.5) # não é necessário inserir um timer, deixei-o aqui para posterior consulta na sintaxe e uso em outros sistemas
         clear()
@@ -54,7 +55,8 @@ def jog2():
         input('Programa finalizado. Pressione Enter.')
         sys.exit()
 
-def verificador(tab): # método para verificação de vitória, separei em vários elif's para não ter uma única operação lógica imensa
+def verificador(tab): 
+# método para verificação de vitória, separei em vários elif's para não ter uma única operação lógica imensa, contém todas as possibilidades de vitória
     if tab[0][0] == tab[0][1] == tab[0][2] == 'X' or tab[1][0] == tab[1][1] == tab[1][2] == 'X': # duas primeiras colunas de 'X'
         jog1()
     elif tab[0][0] == tab[1][0] == tab[2][0] == 'X' or tab[0][0] == tab[1][0] == tab[2][0] == 'X': # terceira coluna e primeira linha de 'X'
@@ -72,23 +74,22 @@ def verificador(tab): # método para verificação de vitória, separei em vári
     elif tab[0][0] == tab[1][1] == tab[2][2] == 'O' or tab[0][2] == tab[1][1] == tab[2][0] == 'O': # diagonais de 'O'
         jog2()
 
+
 # PROGRAMA PRINCIPAL
 
 tab = [['*' for i in range(3)] for num in range(3)] # declarando o tabuleiro, usando List Comprehension
 
-#painel() 
+painel() 
 print('O jogo funciona da seguinte forma: as posições variam de 0 a 2, sendo 0 a primeira posição e 2 a última posição da linha ou coluna.', end = ' ')
 input("Primeiro você escolherá a posição na coluna, em seguida a posição na linha. Os locais com '*' indicam as posições vazias. Pressione Enter.")
 
-cont = 0
+cont = 0 # contador de jogadas
 while True:
     verificador(tab)
     clear()
-    
     if cont % 2 == 0: # vez do jogador 1
         tabuleiro(tab)
         print(f"Jogador 1, digite onde deseja marcar o 'X' (rodada {cont}): ", end = ' ')
-
         a = int(input())
         if not 0 <= a <= 2: # verificar se a posição varia entre 0 e 2, inclusive, para evitar keyerror
             while True:
@@ -98,9 +99,7 @@ while True:
                 a = int(input())
                 if 0 <= a <= 2:
                     break
-        
         b = int(input())
-
         if not 0 <= b <= 2: # verificar se a posição varia entre 0 e 2, inclusive, para evitar keyerror
             while True:
                 clear()
@@ -126,14 +125,12 @@ while True:
                         if 0 <= a <= 2:
                             break
                 b = int(input())
-
                 if tab[b][a] == '*': # se a vaga estiver não preenchida
                     break
         tab[b][a] = 'X'
     else: # vez do jogador 2
         tabuleiro(tab)
         print(f"Jogador 2, digite onde deseja marcar o 'O' (rodada {cont}): ", end = ' ')
-        
         a = int(input())
         if not 0 <= a <= 2: # verificar se a posição varia entre 0 e 2, inclusive, para evitar keyerror
             while True:
@@ -162,7 +159,6 @@ while True:
                 b = int(input())
                 if 0 <= b <= 2:
                     break
-
         if tab[b][a] == 'X' or tab[b][a] == 'O': # verificando se a posição escolhida já foi ocupada
             while True:
                 clear()
@@ -177,7 +173,6 @@ while True:
                         a = int(input())
                         if 0 <= a <= 2:
                             break
-
                 b = int(input())
                 if not 0 <= b <= 2: # verificar se a posição varia entre 0 e 2, inclusive, para evitar keyerror
                     while True:
@@ -194,7 +189,7 @@ while True:
     clear()
     cont += 1
 
-    if cont == 9:
+    if cont == 9: # finaliza no número máximo de jogadas
         clear()
         tabuleiro(tab)
         a = input('EMPATE!!! Jogar novamente (s/n)? ')
