@@ -4,7 +4,7 @@ Jogo da velha
 
 import time # import para time.sleep()
 import os # import para clear()
-import sys # import para sys.exit()
+import sys
 
 clear = lambda: os.system('clear') # script para clear()
 
@@ -17,11 +17,14 @@ def painel(): # função desnecessária, apenas para usar o time.sleep() de uma 
         time.sleep(0.5)
 
 def tabuleiro(tab): # função apenas para imprimir o tabuleiro atual
-    print()
+    c = 0
+    print('  0  1  2')
     for i in tab:
-        print(end = '  ')
+        print(c, end = '')
+        c += 1
+        print(end = ' ')
         for a in i:
-            print(a, end = ' ')
+            print(a, end = '  ')
         print()
     print()
 
@@ -33,7 +36,7 @@ def jog1(): # método para vitória do jogar 1
     a = input('JOGADOR 1 VENCEU O JOGO!!! Jogar novamente (s/n)? ')
     if a == 's':
         cont = 0
-        tab = [['*' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
+        tab = [['-' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
         clear()
     else:
         clear()
@@ -48,7 +51,7 @@ def jog2():
     a = input('JOGADOR 2 VENCEU O JOGO!!! Jogar novamente (s/n)? ')
     if a == 's':
         cont = 0
-        tab = [['*' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
+        tab = [['-' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
         clear()
     else:
         clear()
@@ -77,11 +80,11 @@ def verificador(tab):
 
 # PROGRAMA PRINCIPAL
 
-tab = [['*' for i in range(3)] for num in range(3)] # declarando o tabuleiro, usando List Comprehension
+tab = [['-' for i in range(3)] for num in range(3)] # declarando o tabuleiro, usando List Comprehension
 
 painel() 
 print('O jogo funciona da seguinte forma: as posições variam de 0 a 2, sendo 0 a primeira posição e 2 a última posição da linha ou coluna.', end = ' ')
-input("Primeiro você escolherá a posição na coluna, em seguida a posição na linha. Os locais com '*' indicam as posições vazias. Pressione Enter.")
+input("Primeiro você escolherá a posição na coluna, em seguida a posição na linha. Os locais com '-' indicam as posições vazias. Pressione Enter.")
 
 cont = 0 # contador de jogadas
 while True:
@@ -125,7 +128,7 @@ while True:
                         if 0 <= a <= 2:
                             break
                 b = int(input())
-                if tab[b][a] == '*': # se a vaga estiver não preenchida
+                if tab[b][a] == '-': # se a vaga estiver não preenchida
                     break
         tab[b][a] = 'X'
     else: # vez do jogador 2
@@ -183,7 +186,7 @@ while True:
                         b = int(input())
                         if 0 <= b <= 2:
                             break
-                if tab[b][a] == '*': # se a vaga estiver não preenchida
+                if tab[b][a] == '-': # se a vaga estiver não preenchida
                     break
         tab[b][a] = 'O'
     clear()
@@ -195,8 +198,6 @@ while True:
         a = input('EMPATE!!! Jogar novamente (s/n)? ')
         if a == 's':
             cont = 0
-            tab = [['*' for i in range(3)] for num in range(3)]
+            tab = [['-' for i in range(3)] for num in range(3)]
         else:
             break
-            
-
