@@ -42,3 +42,4 @@ keyboard.press('a') # aqui é como se eu mantivesse a tecla 'a' pressionada
 keyboard.release('a') # aqui é como se eu liberasse a tecla 'a' 
 
 ####################################################################
+
