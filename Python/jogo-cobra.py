@@ -59,7 +59,7 @@ a = 0 # iniciando o controle
 clear()
 rastro = [] # lista para guardar o rastro do personagem
 
-def player1(a):
+def player1(a): # controlador do player 1
     global p1, p2
     if a == 'w':
         tab[p1][p2] = '\U0001F533' # tornou-se um lugar vazio
