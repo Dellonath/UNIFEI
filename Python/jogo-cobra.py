@@ -89,4 +89,5 @@ while True: # loop infinito
         tab[i][j] = '\U0001F533' # substituindo as posições mais antigas do personagem por uma área vaga
         g += 1
     clear()
+    
 
