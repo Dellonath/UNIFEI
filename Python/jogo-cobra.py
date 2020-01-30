@@ -29,7 +29,7 @@ def restart_program():
     os.execl(python, python, * sys.argv)
 
 def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
-    global x, y, tam, cont, b, tambot, tambot1
+    global x, y, tam, cont, b, tambot, tambot1, bots
     if p1 == x and p2 == y:
         x = randint(0, 19)
         y = randint(0, 19)
@@ -37,9 +37,22 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
             x = randint(0, 19)
             y = randint(0, 19)
         tab[x][y] = choice(alimentos) # alimento do personagem em local aleatório
-        tam += 1 # tamanho do personagem
-        tambot += 1 # tamanho do personagem bot
-        tambot1 += 1 # tamanho do personagem bot 1
+        t = True
+        if bots == 0:
+            if t:
+                tab[p3][p4], tab[p5][p6] = '\U00002B1B', '\U00002B1B'
+                tambot -= 1
+                tambot1 -= 1
+                t = False
+            tam += 1 # tamanho do personagem
+        elif bots == 1:
+            tam += 1 # tamanho do personagem
+            tambot += 1 # tamanho do personagem bot
+            tab[p5][p6] = '\U00002B1B'
+        elif bots == 2:
+            tam += 1 # tamanho do personagem
+            tambot += 1 # tamanho do personagem bot
+            tambot1 += 1 # tamanho do personagem bot 1
     elif p3 == x and p4 == y:
         x = randint(0, 19)
         y = randint(0, 19)
@@ -47,7 +60,6 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
             x = randint(0, 19)
             y = randint(0, 19)
         tab[x][y] = choice(alimentos) # alimento do personagem em local aleatório
-
     elif p5 == x and p6 == y:
         x = randint(0, 19)
         y = randint(0, 19)
@@ -67,6 +79,9 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
             print(tab[a][b], end = '')
         print()
     print(f"Score \U0001F947 : {tam}\nPosição do personagem \U0001F40D : {p1 + 1}, {p2 + 1}\nPressione 'r' para sair do jogo \U0001F6AB.")
+    print(rastro)
+    print(rastrobot)
+    print(rastrobot1)
 
 def colisão(p1, p2, p3, p4, tam): # verifica se houve colisão e fecha o jogo
     if [p1, p2] in rastro:
@@ -109,11 +124,11 @@ def player1(a):
 def correção(p3, p4):
     if p3 > 19: # o bot não sofre com colisões no fim do tabuleiro
         p3 = 0
-    elif p3 < 0:
+    if p3 < 0:
         p3 = 19
-    elif p4 > 19:
+    if p4 > 19:
         p4 = 0
-    elif p4 < 0:
+    if p4 < 0:
         p4 = 19
     return p3, p4
 
@@ -129,7 +144,7 @@ def bot(p3, p4, tambot, rastrobot):
         if mov == 0: # movimentação contínua do bot
             p3 += 1
             p3, p4 = correção(p3, p4)
-            if not tab[p3][p4] == '\U0001F538': # forçando a cobra bot a andar para frente ou para os lados, sem retornar
+            if not tab[p3][p4] == '\U0001F538':
                 break
             p3 -= 1
         elif mov == 1:
@@ -148,7 +163,7 @@ def bot(p3, p4, tambot, rastrobot):
             p4 -= 1
             p3, p4 = correção(p3, p4)
             '''if not tab[p3][p4] == '\U0001F538':
-                break'''		
+                break'''        
             p4 += 1
     g = len(rastrobot)
     while not g != tambot:
@@ -170,17 +185,17 @@ def painel():
 # declarações importantes e iniciais
 clear = lambda: os.system('clear') # script para clear()
 tab = [['\U00002B1B' for b in range(20)] for a in range(20)] # criando o tabuleiro usando list comprehesion
-p1, p2 , p3, p4, p5, p6= 0, 0, 14, 15, 9, 12 # posição inicial do personagem
-x = randint(0, 19) # sorteando o primeiro alimento
+p1, p2, p3, p4, p5, p6 = 0, 0, 10, 10, 15, 15 # posição inicial do personagem
+x = randint(0, 19) # sorteando a posição do primeiro alimento
 y = randint(0, 19)
 tam = 1 # tamanho inicial da cobra
-tambot = 1 # tamanho inicial da cobra bot
-tambot1 = 1
+tambot, tambot1 = 0, 0
 a = 0 # iniciando o controle
 rastro = [] # lista para guardar o rastro do personagem
-rastrobot = []
-rastrobot1 = []
-alimentos = ['\U0001F95A', '\U0001F35E', '\U0001F34A', '\U0001F352', '\U0001F34E', '\U0001F347', '\U0001F42D', '\U0001F430', '\U0001F400', '\U0001F430', '\U0001F425']
+rastrobot = [] # lista para guardar o rastro do personagem bot 
+rastrobot1 = [] # lista para guardar o rastro do personagem bot 1
+alimentos = ['\U0001F95A', '\U0001F35E', '\U0001F34A', '\U0001F352', '\U0001F34E', '\U0001F347', # ícones de alimentos
+'\U0001F42D', '\U0001F430', '\U0001F400', '\U0001F430', '\U0001F425'] 
 tab[x][y] = choice(alimentos) # alimento do personagem
 
 clear()
@@ -188,7 +203,12 @@ painel()
 print('Digite o número de bots que deseja colocar(0, 1 ou 2): ')
 bots = int(readchar())
 clear()
-
+if bots == 1:
+    p3, p4 = 14, 15
+    tambot = 1
+elif bots == 2:
+    tambot, tambot1 = 1, 1
+    p5, p6 = 9, 12
 while True: # loop infinito
     tabuleiro(tab, p1, p2, p3, p4, p5, p6)
     for i in range(bots + 1):
@@ -202,4 +222,3 @@ while True: # loop infinito
             [p5, p6] = bot(p5, p6, tambot1, rastrobot1)
             tab[p5][p6] = '\U0001F536' # posição atual do personagem bot 
     clear()
-
