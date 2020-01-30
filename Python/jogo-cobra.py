@@ -129,7 +129,7 @@ def bot(p3, p4, tambot, rastrobot):
         if mov == 0: # movimentação contínua do bot
             p3 += 1
             p3, p4 = correção(p3, p4)
-            if not tab[p3][p4] == '\U0001F538':
+            if not tab[p3][p4] == '\U0001F538': # forçando a cobra bot a andar para frente ou para os lados, sem retornar
                 break
             p3 -= 1
         elif mov == 1:
