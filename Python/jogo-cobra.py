@@ -79,9 +79,6 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
             print(tab[a][b], end = '')
         print()
     print(f"Score \U0001F947 : {tam}\nPosição do personagem \U0001F40D : {p1 + 1}, {p2 + 1}\nPressione 'r' para sair do jogo \U0001F6AB.")
-    print(rastro)
-    print(rastrobot)
-    print(rastrobot1)
 
 def colisão(p1, p2, p3, p4, tam): # verifica se houve colisão e fecha o jogo
     if [p1, p2] in rastro:
