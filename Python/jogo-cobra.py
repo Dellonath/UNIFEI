@@ -71,7 +71,7 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
 def colisão(p1, p2, p3, p4, tam): # verifica se houve colisão e fecha o jogo
     if [p1, p2] in rastro:
         clear()
-        input("Você colidiu contra si mesmo! Aguarde.\n")
+        print("Você colidiu contra si mesmo! Aguarde.\n")
         time.sleep(3)
         restart_program()
     elif [p1, p2] in rastrobot or [p1, p2] in rastrobot1:
@@ -202,3 +202,4 @@ while True: # loop infinito
             [p5, p6] = bot(p5, p6, tambot1, rastrobot1)
             tab[p5][p6] = '\U0001F536' # posição atual do personagem bot 
     clear()
+
