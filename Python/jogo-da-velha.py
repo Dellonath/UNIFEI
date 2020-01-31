@@ -18,13 +18,13 @@ def painel(): # função desnecessária, apenas para usar o time.sleep() de uma 
 
 def tabuleiro(tab): # função apenas para imprimir o tabuleiro atual
     c = 0
-    print('  0  1  2')
+    print('   0  1  2')
     for i in tab:
         print(c, end = '')
         c += 1
         print(end = ' ')
         for a in i:
-            print(a, end = '  ')
+            print(a, end = ' ')
         print()
     print()
 
@@ -36,7 +36,7 @@ def jog1(): # método para vitória do jogar 1
     a = input('JOGADOR 1 VENCEU O JOGO!!! Jogar novamente (s/n)? ')
     if a == 's':
         cont = 0
-        tab = [['-' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
+        tab = [['\U00002B1B' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
         clear()
     else:
         clear()
@@ -51,7 +51,7 @@ def jog2():
     a = input('JOGADOR 2 VENCEU O JOGO!!! Jogar novamente (s/n)? ')
     if a == 's':
         cont = 0
-        tab = [['-' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
+        tab = [['\U00002B1B' for i in range(3)] for num in range(3)] # reiniciando o tabuleiro
         clear()
     else:
         clear()
@@ -60,31 +60,31 @@ def jog2():
 
 def verificador(tab): 
 # método para verificação de vitória, separei em vários elif's para não ter uma única operação lógica imensa, contém todas as possibilidades de vitória
-    if tab[0][0] == tab[0][1] == tab[0][2] == 'X' or tab[1][0] == tab[1][1] == tab[1][2] == 'X': # duas primeiras colunas de 'X'
+    if tab[0][0] == tab[0][1] == tab[0][2] == '\U0001F537' or tab[1][0] == tab[1][1] == tab[1][2] == '\U0001F537': # duas primeiras colunas 
         jog1()
-    elif tab[0][0] == tab[1][0] == tab[2][0] == 'X' or tab[0][0] == tab[1][0] == tab[2][0] == 'X': # terceira coluna e primeira linha de 'X'
+    elif tab[0][0] == tab[1][0] == tab[2][0] == '\U0001F537' or tab[0][0] == tab[1][0] == tab[2][0] == '\U0001F537': # terceira coluna e primeira linha 
         jog1()
-    elif tab[0][1] == tab[1][1] == tab[2][1] == 'X' or tab[0][2] == tab[1][2] == tab[2][2] == 'X': # duas últimas linhas de 'X'
+    elif tab[0][1] == tab[1][1] == tab[2][1] == '\U0001F537' or tab[0][2] == tab[1][2] == tab[2][2] == '\U0001F537': # duas últimas linhas
         jog1()
-    elif tab[0][0] == tab[1][1] == tab[2][2] == 'X' or tab[0][2] == tab[1][1] == tab[2][0] == 'X': # diagonais de 'X'
+    elif tab[0][0] == tab[1][1] == tab[2][2] == '\U0001F537' or tab[0][2] == tab[1][1] == tab[2][0] == '\U0001F537': # diagonais
         jog1()
-    elif tab[0][0] == tab[0][1] == tab[0][2] == 'O' or tab[1][0] == tab[1][1] == tab[1][2] == 'O': # duas primeiras colunas de 'O'
+    elif tab[0][0] == tab[0][1] == tab[0][2] == '\U0001F536' or tab[1][0] == tab[1][1] == tab[1][2] == '\U0001F536': 
         jog2()
-    elif tab[0][0] == tab[1][0] == tab[2][0] == 'O' or tab[0][0] == tab[1][0] == tab[2][0] == 'O': # terceira coluna e primeira linha de 'O'
+    elif tab[0][0] == tab[1][0] == tab[2][0] == '\U0001F536' or tab[0][0] == tab[1][0] == tab[2][0] == '\U0001F536': 
         jog2()
-    elif tab[0][1] == tab[1][1] == tab[2][1] == 'O' or tab[0][2] == tab[1][2] == tab[2][2] == 'O': # duas últimas linhas de 'O'
+    elif tab[0][1] == tab[1][1] == tab[2][1] == '\U0001F536' or tab[0][2] == tab[1][2] == tab[2][2] == '\U0001F536': 
         jog2()
-    elif tab[0][0] == tab[1][1] == tab[2][2] == 'O' or tab[0][2] == tab[1][1] == tab[2][0] == 'O': # diagonais de 'O'
+    elif tab[0][0] == tab[1][1] == tab[2][2] == '\U0001F536' or tab[0][2] == tab[1][1] == tab[2][0] == '\U0001F536': 
         jog2()
 
 
 # PROGRAMA PRINCIPAL
 
-tab = [['-' for i in range(3)] for num in range(3)] # declarando o tabuleiro, usando List Comprehension
+tab = [['\U00002B1B' for i in range(3)] for num in range(3)] # declarando o tabuleiro, usando List Comprehension
 
 painel() 
 print('O jogo funciona da seguinte forma: as posições variam de 0 a 2, sendo 0 a primeira posição e 2 a última posição da linha ou coluna.', end = ' ')
-input("Primeiro você escolherá a posição na coluna, em seguida a posição na linha. Os locais com '-' indicam as posições vazias. Pressione Enter.")
+input("Primeiro você escolherá a posição na coluna, em seguida a posição na linha. Os locais com \U00002B1B indicam as posições vazias. Pressione Enter.")
 
 cont = 0 # contador de jogadas
 while True:
@@ -92,7 +92,7 @@ while True:
     clear()
     if cont % 2 == 0: # vez do jogador 1
         tabuleiro(tab)
-        print(f"Jogador 1, digite onde deseja marcar o 'X' (rodada {cont}): ", end = ' ')
+        print(f"Jogador 1, digite onde deseja marcar o \U0001F537 (rodada {cont}): ", end = ' ')
         a = int(input())
         if not 0 <= a <= 2: # verificar se a posição varia entre 0 e 2, inclusive, para evitar keyerror
             while True:
@@ -113,7 +113,7 @@ while True:
                 if 0 <= b <= 2:
                     break
 
-        if tab[b][a] == 'X' or tab[b][a] == 'O': # verificando se a posição escolhida já foi ocupada
+        if tab[b][a] == '\U0001F537' or tab[b][a] == '\U0001F536': # verificando se a posição escolhida já foi ocupada
             while True:
                 clear()
                 tabuleiro(tab)
@@ -128,12 +128,12 @@ while True:
                         if 0 <= a <= 2:
                             break
                 b = int(input())
-                if tab[b][a] == '-': # se a vaga estiver não preenchida
+                if tab[b][a] == '\U00002B1B': # se a vaga estiver não preenchida
                     break
-        tab[b][a] = 'X'
+        tab[b][a] = '\U0001F537'
     else: # vez do jogador 2
         tabuleiro(tab)
-        print(f"Jogador 2, digite onde deseja marcar o 'O' (rodada {cont}): ", end = ' ')
+        print(f"Jogador 2, digite onde deseja marcar o \U0001F536 (rodada {cont}): ", end = ' ')
         a = int(input())
         if not 0 <= a <= 2: # verificar se a posição varia entre 0 e 2, inclusive, para evitar keyerror
             while True:
@@ -162,7 +162,7 @@ while True:
                 b = int(input())
                 if 0 <= b <= 2:
                     break
-        if tab[b][a] == 'X' or tab[b][a] == 'O': # verificando se a posição escolhida já foi ocupada
+        if tab[b][a] == '\U0001F537' or tab[b][a] == '\U0001F536': # verificando se a posição escolhida já foi ocupada
             while True:
                 clear()
                 tabuleiro(tab)
@@ -186,9 +186,9 @@ while True:
                         b = int(input())
                         if 0 <= b <= 2:
                             break
-                if tab[b][a] == '-': # se a vaga estiver não preenchida
+                if tab[b][a] == '\U00002B1B': # se a vaga estiver não preenchida
                     break
-        tab[b][a] = 'O'
+        tab[b][a] = '\U0001F536'
     clear()
     cont += 1
 
@@ -198,6 +198,6 @@ while True:
         a = input('EMPATE!!! Jogar novamente (s/n)? ')
         if a == 's':
             cont = 0
-            tab = [['-' for i in range(3)] for num in range(3)]
+            tab = [['\U00002B1B' for i in range(3)] for num in range(3)]
         else:
             break
