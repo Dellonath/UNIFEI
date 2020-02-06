@@ -5,6 +5,7 @@ import termios # necessário importar esta biblioteca para readchar()
 from random import randint # import para número aleatórios randint(valor min, valor max)
 from random import choice # randomizar elementos de lista choice(lista)
 import time
+from colorama import Fore, Style, init # import para print colorido
 
 def readchar(): # esta é a implementação do readchar() no Linux, é necessário adicioná-la no programa
     fd = sys.stdin.fileno()
@@ -78,22 +79,23 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
         for b in range(20):
             print(tab[a][b], end = '')
         print()
-    print(f"Score \U0001F947 : {tam}\nPosição do personagem \U0001F40D : {p1 + 1}, {p2 + 1}\nPressione 'r' para sair do jogo \U0001F6AB.")
+    print(Fore.YELLOW + f"Score \U0001F947 : {tam}", Fore.GREEN + f"\nPosição do personagem \U0001F40D : {p1 + 1}, {p2 + 1}", 
+    	Fore.RED + f"\nPressione 'r' para sair do jogo \U0001F6AB.")
 
 def colisão(p1, p2, p3, p4, tam): # verifica se houve colisão e fecha o jogo
     if [p1, p2] in rastro:
         clear()
-        print("Você colidiu contra si mesmo! Aguarde.\n")
+        print(Fore.RED + "Você colidiu contra si mesmo! Aguarde.\n")
         time.sleep(3)
         restart_program()
     elif [p1, p2] in rastrobot or [p1, p2] in rastrobot1:
         clear()
-        print("Você colidiu contra a cobra bot! Aguarde.\n")
+        print(Fore.RED + "Você colidiu contra a cobra bot! Aguarde.\n")
         time.sleep(3)
         restart_program()
     elif [p3, p4] in rastro or [p5, p6] in rastro:
         clear()
-        print("Você foi atingido pela cobra bot! Aguarde.\n")
+        print(Fore.RED + "Você foi atingido pela cobra bot! Aguarde.\n")
         time.sleep(3)
         restart_program()
 
@@ -173,13 +175,15 @@ def painel():
     painel = list("SNAKE'S SURVIVOR")
     for i in range(3):
         clear()
-        print("\U0001F40D SNAKE'S SURVIVOR \U0001F40D")
+        print(Fore.GREEN + Style.BRIGHT + "  \U0001F40D SNAKE'S SURVIVOR \U0001F40D")
         time.sleep(0.5)
         clear()
         time.sleep(0.5)
-    print("\U0001F40D SNAKE'S SURVIVOR \U0001F40D\n        Created by Douglas R. O. Silva \U0001F1E7 \U0001F1F7\n")
+    print(Fore.GREEN + Style.BRIGHT + "  \U0001F40D SNAKE'S SURVIVOR \U0001F40D\n", 
+    	"                    Created by Douglas R. O. Silva", Fore.GREEN + Style.BRIGHT + 'B', Fore.YELLOW + Style.BRIGHT + 'R' )
 
 # declarações importantes e iniciais
+init(autoreset=True)
 clear = lambda: os.system('clear') # script para clear()
 tab = [['\U00002B1B' for b in range(20)] for a in range(20)] # criando o tabuleiro usando list comprehesion
 p1, p2, p3, p4, p5, p6 = 0, 0, 10, 10, 15, 15 # posição inicial do personagem
