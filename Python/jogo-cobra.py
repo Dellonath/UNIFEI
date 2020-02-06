@@ -79,7 +79,7 @@ def tabuleiro(tab, p1, p2, p3, p4, p5, p6):
         for b in range(20):
             print(tab[a][b], end = '')
         print()
-    print(Fore.YELLOW + f"Score \U0001F947 : {tam}", Fore.GREEN + f"\nPosição do personagem \U0001F40D : {p1 + 1}, {p2 + 1}", 
+    print(Fore.LIGHTYELLOW_EX + f"Score \U0001F947 : {tam}", Fore.GREEN + f"\nPosição do personagem \U0001F40D : {p1 + 1}, {p2 + 1}", 
     	Fore.RED + f"\nPressione 'r' para sair do jogo \U0001F6AB.")
 
 def colisão(p1, p2, p3, p4, tam): # verifica se houve colisão e fecha o jogo
