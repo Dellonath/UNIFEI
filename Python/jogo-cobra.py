@@ -180,7 +180,7 @@ def painel():
         clear()
         time.sleep(0.5)
     print(Fore.GREEN + Style.BRIGHT + "  \U0001F40D SNAKE'S SURVIVOR \U0001F40D\n", 
-    	"                    Created by Douglas R. O. Silva", Fore.GREEN + Style.BRIGHT + 'B', Fore.YELLOW + Style.BRIGHT + 'R' )
+    	"                    Created by Douglas R. O. Silva", Fore.GREEN + Style.BRIGHT + 'B', Fore.LIGHTYELLOW_EX + Style.BRIGHT + 'R' )
 
 # declarações importantes e iniciais
 init(autoreset=True)
