@@ -159,8 +159,8 @@ def bot(p3, p4, tambot, rastrobot):
         elif mov == 3:
             p4 -= 1
             p3, p4 = correção(p3, p4)
-            '''if not tab[p3][p4] == '\U0001F538':
-                break'''        
+            if not tab[p3][p4] == '\U0001F538':
+                break      
             p4 += 1
     g = len(rastrobot)
     while not g != tambot:
