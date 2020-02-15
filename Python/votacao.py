@@ -28,7 +28,7 @@ def painel():
     print('VOTAÇÃO DE MELHOR OS')
     print('1 - Windows\n2 - Unix\n3 - Linux\n4 - Netware\n5 - MacOS\n6 - Outro\n0 - Sair')
 
-# criando o sistema para clear()
+# renomeando a função os.system('clear') para clear()
 clear = lambda: os.system('clear')
 
 # criando a lista de valores
