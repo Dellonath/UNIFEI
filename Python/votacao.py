@@ -22,7 +22,6 @@ def votacao(nome, i):
     print(f'O Sistema Operacional mais votado foi o {nome}, com {lista.count(i)} votos, correspondendo a {int(lista.count(i)*100/len(lista))}% dos votos.')
 
 # criando o painel
-
 def painel():
     print('VOTAÇÃO DE MELHOR OS')
     print('1 - Windows\n2 - Unix\n3 - Linux\n4 - Netware\n5 - MacOS\n6 - Outro\n0 - Sair')
@@ -66,17 +65,17 @@ vencedor = []
 while i <=6:
     vencedor.append(lista.count(i))
     i += 1
-i = vencedor.index(max(vencedor)) + 1
+i = vencedor.index(max(vencedor))
 # fornecendo o resultado
-if i == 1:
+if i == 0:
     votacao('Windows', 1)
-elif i == 2:
+elif i == 1:
     votacao('Unix', 2)
-elif i == 3:
+elif i == 2:
     votacao('Linux', 3)
-elif i == 4:
+elif i == 3:
     votacao('Netware', 4)
-elif i == 5:
+elif i == 4:
     votacao('MacOS', 5)
 else:
     votacao('Outros', 6)
