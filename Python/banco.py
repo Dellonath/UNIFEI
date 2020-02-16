@@ -5,14 +5,12 @@ from passlib.hash import pbkdf2_sha256 as cryp # import para criptografia de sen
 class Pessoa:
     '''Classe responsável por qualquer instância relacionada à uma pessoa física, seja cliente ou funcionário.'''
 
-    def __init__(self, nome, sobrenome, cpf, idade, endereco, login, senha):
+    def __init__(self, nome, sobrenome, cpf, idade, endereco):
         self.__nome = nome
         self.__sobrenome = sobrenome
         self.__cpf = cpf
         self.__idade = idade
         self.__endereco = endereco
-        self.__login = login
-        self.__senha = cryp.hash(senha, rounds=200000, salt_size=16)
 
     def apenas_letras(arg0, arg1): 
         '''Verifica se há apenas letras no argumento 1 para ser alterado.'''
@@ -66,10 +64,6 @@ class Pessoa:
     def endereco(self):
         return f'{self.__endereco}'
 
-    @property
-    def login(self):
-        return f'{self.__login}'
-
     # declarando os sets da classe Pessoa
     @nome.setter
     def nome(self, nome):
@@ -95,23 +89,18 @@ class Pessoa:
     def endereco(self, endereco):
         if Pessoa.apenas_letras(self.endereco, endereco):
             self.__endereco = endereco
+    
 
-    @login.setter
-    def login(self, login):
-        self.__login = login
-
-    @senha.setter
-    def senha(self, senha):
-        self.__senha = cryp.hash(senha, rounds=200000, salt_size=16)
-        
 class Cliente(Pessoa):
     '''Definição da classe Cliente, sub-classe de da classe Pessoa.'''
  
     __conta = 11989
  
     def __init__(self, nome, sobrenome, cpf, idade, endereco, login, senha, renda, limite, saldo):
-        super().__init__(nome, sobrenome, cpf, idade, endereco, login, senha)
+        super().__init__(nome, sobrenome, cpf, idade, endereco)
         self.__conta = Cliente.__conta + 13
+        self.__login = login
+        self.__senha = cryp.hash(senha, rounds=200000, salt_size=16)
         self.__renda = renda
         self.__limite = limite
         self.__saldo = saldo    
@@ -132,6 +121,14 @@ class Cliente(Pessoa):
     @property
     def saldo(self):
         return f'{self.__saldo}'
+
+    @property
+    def login(self):
+        return f'{self.__login}'
+
+    @property
+    def senha(self):
+        return f'{self.__senha}'
         
     @renda.setter
     def renda(self, renda):
@@ -146,6 +143,14 @@ class Cliente(Pessoa):
     def saldo(self, saldo):
         if Pessoa.apenas_numeros(self.__saldo, saldo):
             self.__saldo = saldo
+
+    @login.setter
+    def login(self, login):
+        self.__login = login
+
+    @senha.setter
+    def senha(self):
+        return f'{self.__senha}'
 
     def depositar(self, valor):
         if valor < 0:
@@ -181,8 +186,10 @@ class Funcionario(Pessoa):
     __matricula = 990
 
     def __init__(self, nome, sobrenome, cpf, idade, endereco, login, senha):
-        super().__init__(nome, sobrenome, cpf, idade, endereco, login, senha)
+        super().__init__(nome, sobrenome, cpf, idade, endereco)
         self.__matricula = Funcionario.__matricula + 10
+        self.__login = login
+        self.__senha = cryp.hash(senha, rounds=200000, salt_size=16)
         self.__renda = renda
         self.__limite = limite
         self.__saldo = saldo    
@@ -194,11 +201,21 @@ class Funcionario(Pessoa):
 
 
 
+
+
+
+
+
+
+
+
+
+
 clear = lambda: os.system('clear')
 
 douglas = Cliente('douglas', 'oliveira', 987654, 21, 'maria da fé', 'douglasrasr', 'asdd1312d',1500, 5000, 10000)
 
-print(douglas.idade)
+print(douglas.login)
 print(douglas.senha)
 
 
