@@ -114,7 +114,6 @@ class Pessoa:
         return False
     
 class Cliente(Pessoa):
-    '''Definição da classe Cliente, sub-classe de da classe Pessoa.'''
  
     __conta = 11989
  
@@ -178,50 +177,33 @@ class Cliente(Pessoa):
             time.sleep(2)
             return
         self.__saldo -= valor
-        destino.__saldo += valor
-
-    
+        destino.__saldo += valor 
 
 class Funcionario(Pessoa):
 
     __matricula = 990
 
-    def __init__(self, nome, sobrenome, cpf, idade, endereco, login, senha):
+    def __init__(self, nome, sobrenome, cpf, idade, endereco, login, senha, setor):
         super().__init__(nome, sobrenome, cpf, idade, endereco, login, senha)
-        self.__matricula = Funcionario.__matricula + 10  
+        self.__matricula = Funcionario.__matricula + 10
+        self.__setor = setor
         Funcionario.__matricula = self.__matricula # atualiza o valor do número conta da sub-classe Cliente
 
+    @property
+    def matricula(self):
+    	return f'{self.__matricula}'
+
+    @property
+    def setor(self):
+    	return f'{self.__setor}'
+
+    @setor.setter
+    def setor(self, setor):
+        self.__saldo = saldo
+
+clear = lambda: os.system('clear') # criando função lambda para simplificação de uso
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-clear = lambda: os.system('clear')
-
-douglas = Cliente('douglas', 'oliveira', 987654, 21, 'maria da fé', 'douglasrasr', 'asdd1312d',1500, 5000, 10000)
-
-print(douglas.nome)
-print(douglas.sobrenome)
-print(douglas.cpf)
-print(douglas.idade)
-print(douglas.endereco)
-print(douglas.login)
-print(douglas.senha)
-print(douglas.renda)
-print(douglas.conta)
-print(douglas.limite)
-print(douglas.saldo)
 
 
 
