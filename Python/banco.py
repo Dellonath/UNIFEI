@@ -20,23 +20,34 @@ def readchar(): # esta é a implementação do readchar(), esta função cumpre 
 def painel_apresentacao():
     print(Style.BRIGHT + Fore.CYAN + 'BEM-VINDO AO ACADY')
     print(Style.BRIGHT + Fore.CYAN + 'O seu banco amigo\n')
-    print(Fore.CYAN + 'Pressione 1 para Login.')
-    print(Fore.CYAN + 'Pressione 2 para Registrar.\n')
+    print(Fore.CYAN + 'Abaixo há algumas opções, pressione o que você deseja fazer: ')
+    print(Fore.CYAN + '1 - Login.')
+    print(Fore.CYAN + '2 - Registrar.\n')
     return readchar()
 
-def painel_cliente(objeto):
-    print(Style.BRIGHT + Fore.CYAN + f'Olá, {objeto.nome_completo}, bem-vindo à sua ACADY Account.')
+def painel_cliente(cliente):
+    print(Style.BRIGHT + Fore.CYAN + f'Olá, {cliente.nome} {cliente.sobrenome}, bem-vindo à sua ACADY Account.')
+    print(Fore.CYAN + 'CLIENTE')
     print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.")
     print(Fore.CYAN + 'Abaixo há algumas opções, pressione o que você deseja fazer: ')
-    print(Fore.CYAN + '1 - Depositar ')
-    print(Fore.CYAN + '2 - Sacar ')
+    print(Fore.CYAN + '1 - Depositar')
+    print(Fore.CYAN + '2 - Sacar')
     print(Fore.CYAN + '3 - Transferir')
-    print(Fore.CYAN + '4 - Consultar ')
-    print(Fore.CYAN + '2 - Sacar ')
-    print(Fore.CYAN + '3 - Transferir')
-    print(Fore.CYAN + '1 - Depositar ')
-    print(Fore.CYAN + '2 - Sacar ')
-    print(Fore.CYAN + '3 - Transferir')
+    print(Fore.CYAN + '4 - Consultar Extrato')
+    print(Fore.CYAN + '5 - Sair')
+    return readchar()
+
+def painel_colaborador(colaborador):
+    print(Style.BRIGHT + Fore.CYAN + f'Olá, {colaborador.nome} {colaborador.sobrenome}, bem-vindo à sua ACADY Account.')
+    print(Fore.CYAN + 'COLABORADOR')
+    print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.")
+    print(Fore.CYAN + 'Abaixo há algumas opções, pressione o que você deseja fazer: ')
+    print(Fore.CYAN + '1 - Criar cliente')
+    print(Fore.CYAN + '2 - Remover cliente ')
+    print(Fore.CYAN + '3 - Consultar cliente')
+    print(Fore.CYAN + '4 - Alterar cliente')
+    print(Fore.CYAN + '5 - Sair ')
+    return readchar()
 
 class Pessoa:
     '''Classe responsável por qualquer instância relacionada à uma pessoa física, seja cliente ou funcionário.'''
@@ -263,15 +274,15 @@ class Cliente(Pessoa):
             print('Comando não identificado. Operação cancelada.')
             time.sleep(2)             
 
-class Funcionario(Pessoa):
+class colaborador(Pessoa):
 
     __matricula = 990
 
     def __init__(self, nome, sobrenome, cpf, idade, endereco, login, senha, setor):
         super().__init__(nome, sobrenome, cpf, idade, endereco, login, senha)
-        self.__matricula = Funcionario.__matricula + 10
+        self.__matricula = colaborador.__matricula + 10
         self.__setor = setor
-        Funcionario.__matricula = self.__matricula # atualiza o valor do número conta da sub-classe Cliente
+        colaborador.__matricula = self.__matricula # atualiza o valor do número conta da sub-classe Cliente
 
     @property
     def matricula(self):
@@ -287,18 +298,20 @@ class Funcionario(Pessoa):
 
 clear = lambda: os.system('clear') # criando função lambda para simplificação de uso
 init(autoreset=True) # iniciando o init do colorama
-agora = datetime.now() # definindo a variável atual para obter tempo atual 
+agora = datetime.now() # definindo a variável atual para obter tempo atual
 
 douglas = Cliente('NOME', 'SOBRENOME', 123456789, 25, 'ENDERECO', 'LOGIN', 'SENHA', 1000, 1000, 1000)
 mario = Cliente('NOME2', 'SOBRENOME2', 987654321, 23, 'ENDERECO2', 'LOGIN2', 'SENHA2', 2000, 2000, 2000)
 
+painel_cliente(douglas)
+'''
 print(douglas.saldo)
 print(mario.saldo)
 douglas.sacar(400)
 douglas.transferir(300, mario)
 print(douglas.saldo)
 print(mario.saldo)
-
+'''
 
 
 
