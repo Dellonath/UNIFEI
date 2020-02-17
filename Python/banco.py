@@ -22,7 +22,8 @@ def painel_apresentacao():
     print(Style.BRIGHT + Fore.CYAN + 'O seu banco amigo\n')
     print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
     print('1 - Login.')
-    print('2 - Sair.\n')
+    print('2 - Sistema Interno (Acesso Restrito à Colaboradores).')
+    print('3 - Sair.\n')
     return readchar()
 
 def painel_cliente(cliente):
@@ -37,8 +38,312 @@ def painel_cliente(cliente):
     print('5 - Consultar informações')
     print('6 - Sair')
     return readchar()
-    
 
+def painel_colaborador(colaborador):
+    print(Style.BRIGHT + Fore.CYAN + f'Olá, {colaborador.nome} {colaborador.sobrenome}, bem-vindo à sua ACADY Manager Account.')
+    print(Fore.CYAN + 'COLABORADOR')
+    print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.")
+    print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
+    print('1 - Criar cliente')
+    print('2 - Criar funcionário')
+    print('3 - Remover cliente ')
+    print('4 - Criar cliente')
+    print('5 - Consultar cliente')
+    print('6 - Consultar cliente')
+    print('7 - Alterar cliente')
+    print('8 - Alterar cliente')
+    print('9 - Sair ')
+    return readchar()
+
+def conta_colaborador(colaborador, bd_clientes, bd_colaboradores):
+    while True:
+        clear()
+        a = painel_colaborador(colaborador)
+        if a == '1':
+            clear()
+            print('Área de registro de novo cliente ACADY.') 
+            print('Abaixo, insira os dados do cliente: \n')
+            while True:
+                nome = input('Digite o Nome: ').title()
+                if Pessoa.apenas_letras(nome):
+                    break
+            while True:
+                sobrenome = input('Digite o Sobrenome: ').title()
+                if Pessoa.apenas_letras(sobrenome):
+                    break
+            while True:
+                cpf = input('Digite o CPF: ')
+                d = True
+                for client in bd_clientes.values():
+                    if cpf == client.cpf:
+                        clear()
+                        print('Este CPF já foi cadastrado.')
+                        time.sleep(2)
+                        clear()
+                        d = False
+                        break
+                for client in bd_colaboradores.values():
+                    if cpf == client.cpf:
+                        clear()
+                        print('Este CPF já foi cadastrado.')
+                        time.sleep(2)
+                        clear()
+                        d = False
+                        break
+                if d and Pessoa.apenas_numeros(cpf):
+                    break
+            while True:
+                idade = input('Digite a Idade: ')
+                if Pessoa.apenas_numeros(idade):
+                    break
+            while True:
+                sexo = input('Digite o Sexo: ').upper()
+                if sexo == 'M' or sexo == 'F':
+                    break
+                clear()
+                print("Digite 'm' ou 'f' para o sexo do cliente.")
+                clear()
+                time.sleep(2)
+            while True:
+                clear()
+                endereco = input('Digite a Cidade: ').title()
+                if Pessoa.apenas_letras(endereco):
+                    break
+            while True:
+                telefone = input('Digite o Telefone: ')
+                if Pessoa.apenas_numeros(telefone):
+                    break
+            while True:
+                clear()
+                login = input('Digite o Login: ')
+                if login in bd_colaboradores.keys() or login in bd_clientes.keys():
+                    clear()
+                    print('Este login já foi cadastrado.')
+                    time.sleep(2)
+                if login:
+                    break
+                else:
+                    clear()
+                    print('Campo obrigatório.')
+                    time.sleep(2)
+            while True:
+                clear()
+                senha = input('Digite a Senha: ')
+                if senha:
+                    break
+                else:
+                    clear()
+                    print('Campo obrigatório.')
+                    time.sleep(2)
+            while True:
+                clear()
+                renda = int(input('Digite a Renda Inicial: '))
+                if Pessoa.apenas_numeros(renda):
+                    renda = int(renda)
+                    break
+            while True:
+                clear()
+                limite = input('Digite o Limite Inicial: ')
+                if Pessoa.apenas_numeros(limite):
+                    limite = int(limite)
+                    break
+            while True:
+                clear()
+                saldo = input('Digite o Saldo Inicial: ')
+                if Pessoa.apenas_numeros(saldo):
+                    saldo = int(saldo)
+                    break          
+            while True:
+                clear()
+                print('Dados do novo Cliente ACADY: \n')
+                print(f'Nome: {nome}')
+                print(f'Sobrenome: {sobrenome}')
+                print(f'CPF: {cpf}')
+                print(f'Idade: {idade}')
+                print(f'Sexo: {sexo}')
+                print(f'Endereço: {endereco}')
+                print(f'Telefone: {telefone}')
+                print(f'Login: {login}')
+                print(f'Renda: {renda}')
+                print(f'Saldo: {saldo}')
+                print(f'Limite: {limite}\n')
+                print('Deseja mesmo cadastrar este cliente (s/n): ')
+                a = readchar()
+                if a == 's':
+                    try:
+                        bd_clientes[login] = Cliente(nome, sobrenome, cpf, idade, sexo, endereco, telefone, login, senha, renda, limite, saldo)
+                    except:
+                        clear()
+                        print('Não foi possível efetuar o cadastro.')
+                        time.sleep(2)
+                        break
+                    clear()
+                    print('O cliente foi cadastrado com sucesso.')
+                    time.sleep(2)
+                    break
+                elif a == 'n':
+                    clear()
+                    print('Operação cancelada. Os dados foram apagados com sucesso.')
+                    time.sleep(2)
+                    break
+                else:
+                    clear()
+                    print('Comando não reconhecido. Os dados foram apagados.')
+                    time.sleep(2)
+
+        if a == '2':
+            clear()
+            print('Área de registro de novo colaborador ACADY.') 
+            print('Abaixo, insira os dados do colaborador: \n')
+            while True:
+                nome = input('Digite o Nome: ').title()
+                if Pessoa.apenas_letras(nome):
+                    break
+            while True:
+                sobrenome = input('Digite o Sobrenome: ').title()
+                if Pessoa.apenas_letras(sobrenome):
+                    break
+            while True:
+                cpf = input('Digite o CPF: ')
+                d = True
+                for client in bd_clientes.values():
+                    if cpf == client.cpf:
+                        clear()
+                        print('Este CPF já foi cadastrado.')
+                        time.sleep(2)
+                        clear()
+                        d = False
+                        break
+                for client in bd_colaboradores.values():
+                    if cpf == client.cpf:
+                        clear()
+                        print('Este CPF já foi cadastrado.')
+                        time.sleep(2)
+                        clear()
+                        d = False
+                        break
+                if d and Pessoa.apenas_numeros(cpf):
+                    break
+            while True:
+                idade = input('Digite a Idade: ')
+                if Pessoa.apenas_numeros(idade):
+                    break
+            while True:
+                sexo = input('Digite o Sexo: ').upper()
+                if sexo == 'M' or sexo == 'F':
+                    break
+                clear()
+                print("Digite 'm' ou 'f' para o sexo do cliente.")
+                clear()
+                time.sleep(2)
+            while True:
+                clear()
+                endereco = input('Digite a Cidade: ').title()
+                if Pessoa.apenas_letras(endereco):
+                    break
+            while True:
+                telefone = input('Digite o Telefone: ')
+                if Pessoa.apenas_numeros(telefone):
+                    break
+            while True:
+                clear()
+                login = input('Digite o Login: ')
+                if login in bd_colaboradores.keys() or login in bd_clientes.keys():
+                    clear()
+                    print('Este login já foi cadastrado.')
+                    time.sleep(2)
+                if login:
+                    break
+                else:
+                    clear()
+                    print('Campo obrigatório.')
+                    time.sleep(2)
+            while True:
+                clear()
+                senha = input('Digite a Senha: ')
+                if senha:
+                    break
+                else:
+                    clear()
+                    print('Campo obrigatório.')
+                    time.sleep(2)
+            while True:
+                clear()
+                setor = input('Digite o Setor de atuação (RH/Caixa): ')
+                if setor == 'RH' or setor == 'Caixa':
+                    break
+                else:
+                    clear()
+                    print("Digite apenas 'RH' ou 'Caixa'.")
+                    time.sleep(2)
+            while True:
+                clear()
+                print('Dados do novo colaborador ACADY: \n')
+                print(f'Nome: {nome}')
+                print(f'Sobrenome: {sobrenome}')
+                print(f'CPF: {cpf}')
+                print(f'Idade: {idade}')
+                print(f'Sexo: {sexo}')
+                print(f'Endereço: {endereco}')
+                print(f'Telefone: {telefone}')
+                print(f'Login: {login}')
+                print(f'Setor: {setor}\n')
+                print('Deseja mesmo cadastrar este cliente (s/n): ')
+                a = readchar()
+                if a == 's':
+                    try:
+                        bd_colaboradores[login] = Colaborador(nome, sobrenome, cpf, idade, sexo, endereco, telefone, login, senha, setor)
+                    except:
+                        clear()
+                        print('Não foi possível efetuar o cadastro.')
+                        time.sleep(2)
+                        break
+                    clear()
+                    print('O colaborador foi cadastrado com sucesso.')
+                    time.sleep(2)
+                    break
+                elif a == 'n':
+                    clear()
+                    print('Operação cancelada. Os dados foram apagados com sucesso.')
+                    time.sleep(2)
+                    break
+                else:
+                    clear()
+                    print('Comando não reconhecido. Os dados foram apagados.')
+                    time.sleep(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        elif a == '9':
+            clear()
+            print('Logout concluído com sucesso.')
+            time.sleep(2)
+            break
+         
 def conta_cliente(cliente):
     while True:
         clear()
@@ -95,25 +400,13 @@ def conta_cliente(cliente):
             print(f'Login: {cliente.login}')
             print(f'Conta: {cliente.conta}')
             print(f'Renda: {cliente.renda}')
-            print(f'limite: {cliente.limite}')
+            print(f'Limite: {cliente.limite}')
             input('\nDigite Enter para sair: ')
         elif a == '6':
             clear()
             print('Logout concluído com sucesso.')
             time.sleep(2)
             break
-
-def painel_colaborador(colaborador):
-    print(Style.BRIGHT + Fore.CYAN + f'Olá, {colaborador.nome} {colaborador.sobrenome}, bem-vindo à sua ACADY Account.')
-    print(Fore.CYAN + 'COLABORADOR')
-    print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.")
-    print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
-    print('1 - Criar cliente')
-    print('2 - Remover cliente ')
-    print('3 - Consultar cliente')
-    print('4 - Alterar cliente')
-    print('5 - Sair ')
-    return readchar()
 
 class Pessoa:
     '''Classe responsável por qualquer instância relacionada à uma pessoa física, seja cliente ou funcionário.'''
@@ -129,31 +422,29 @@ class Pessoa:
         self.__login = login
         self.__senha = cryp.hash(senha, rounds=200000, salt_size=16)
 
-    def apenas_letras(arg0, arg1): 
+    def apenas_letras(arg0): 
         '''Verifica se há apenas letras no argumento 1 para ser alterado.'''
         for i in range(10):
-            if str(i) in arg1:
+            if str(i) in arg0:
                 clear()
                 print(f'Digite apenas letras. Por favor.')
                 time.sleep(2)
+                clear()
                 return False
         clear()
-        print(f'O dado foi alterado de {arg0} para {arg1} com sucesso.')
-        time.sleep(2)
         return True
 
-    def apenas_numeros(arg0, arg1): 
+    def apenas_numeros(arg0): 
         '''Verifica se há apenas números no argumento 1 para ser alterado.'''
         try:
-            int(arg1)
+            int(arg0)
             clear()
-            print(f'O dado foi alterado de {arg0} para {arg1} com sucesso.')
-            time.sleep(2)
             return True
         except:
             clear()
             print('Digite apenas número. Por favor.')
             time.sleep(2)
+            clear()
             return False
 
     # declarando as propriedades da classe Pessoa
@@ -197,37 +488,37 @@ class Pessoa:
     # declarando os sets da classe Pessoa
     @nome.setter
     def nome(self, nome):
-        if Pessoa.apenas_letras(self.nome, nome):
+        if Pessoa.apenas_letras(nome):
             self.__nome = nome
 
     @sobrenome.setter
     def sobrenome(self, sobrenome):
-        if Pessoa.apenas_letras(self.sobrenome, sobrenome):
+        if Pessoa.apenas_letras(sobrenome):
             self.__sobrenome = sobrenome
         
     @cpf.setter
     def cpf(self, cpf):
-        if Pessoa.apenas_numeros(self.cpf, cpf):
+        if Pessoa.apenas_numeros(cpf):
             self.__cpf = cpf
 
     @idade.setter
     def idade(self, idade):
-        if Pessoa.apenas_numeros(self.idade, idade):
+        if Pessoa.apenas_numeros(idade):
             self.__idade = idade
 
     @sexo.setter
     def sexo(self, sexo):
-        if Pessoa.apenas_numeros(self.sexo, sexo):
+        if Pessoa.apenas_numeros(sexo):
             self.__sexo = sexo
 
     @endereco.setter
     def endereco(self, endereco):
-        if Pessoa.apenas_letras(self.endereco, endereco):
+        if Pessoa.apenas_letras(endereco):
             self.__endereco = endereco
 
     @telefone.setter
     def telefone(self, telefone):
-        if Pessoa.apenas_numeros(self.telefone, telefone):
+        if Pessoa.apenas_numeros(telefone):
             self.__telefone = telefone
 
     @login.setter
@@ -355,12 +646,12 @@ class Cliente(Pessoa):
             return
         clear()
         print(f'TRANSFERIR\nDe: {self.nome} {self.sobrenome} \nConta: {self.conta}\nCPF originário: {self.cpf}\n\nR${valor}\n')
-        print(f'Para: {destino.nome} {destino.sobrenome} \nConta: {destino.conta}\nCPF destinatário: {destino.cpf}')
+        print(f'Para: {destino.nome} {destino.sobrenome} \nConta: {destino.conta}\nCPF destinatário: {destino.cpf}\n')
         print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\n')
         print("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
         a = readchar()
         if a == 's':
-            self.__atividades.append([f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}', 'Transferência', f'R${valor}', f'{destino.nome} {destino.sobrenome}', ])
+            self.__atividades.append([f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}', 'Transferência', f'{destino.nome} {destino.sobrenome}', f'R${valor}'])
             self.__saldo -= valor
             destino.__saldo += valor
             clear()
@@ -375,15 +666,15 @@ class Cliente(Pessoa):
             print('Comando não identificado. Operação cancelada.')
             time.sleep(2)             
 
-class colaborador(Pessoa):
+class Colaborador(Pessoa):
 
     __matricula = 990
 
-    def __init__(self, nome, sobrenome, cpf, idade, sexo, endereco, teefone, login, senha, setor):
+    def __init__(self, nome, sobrenome, cpf, idade, sexo, endereco, telefone, login, senha, setor):
         super().__init__(nome, sobrenome, cpf, idade, sexo, endereco, telefone, login, senha)
-        self.__matricula = colaborador.__matricula + 10
+        self.__matricula = Colaborador.__matricula + 10
         self.__setor = setor
-        colaborador.__matricula = self.__matricula # atualiza o valor do número conta da sub-classe Cliente
+        Colaborador.__matricula = self.__matricula # atualiza o valor do número conta da sub-classe Cliente
 
     @property
     def matricula(self):
@@ -403,18 +694,20 @@ agora = datetime.now() # definindo a variável atual para obter tempo atual
 bd_clientes = {} # banco de dados de clientes
 bd_colaboradores = {} # banco de dado de colaboradores
 
-douglas = Cliente('Douglas', 'Raimundo', 123456789, 25, 'M', 'Maria da Fé', 99154633, 'login', 'senha', 1000, 1000, 1000)
-mario = Cliente('Mario', 'Gomes', 987654321, 25, 'M', 'Itajubá', 99154633, 'login2', 'senha2', 1000, 1000, 1000)
+douglas = Cliente('Douglas', 'Raimundo', '123456789', '25', 'M', 'Maria da Fé', '99154633', 'login', 'senha', 1000, 1000, 1000)
+mario = Cliente('Mario', 'Gomes', '987654321', '25', 'M', 'Itajubá', '99154633', 'login2', 'senha2', 1000, 1000, 1000)
+Carlos = Colaborador('Carlos', 'Eduardo', '123123123', '25', 'M', 'Itajubá', '991634533', 'login3', 'senha3', 'rh')
 
 bd_clientes['conta1'] = douglas
 bd_clientes['conta2'] = mario
+bd_colaboradores['conta3'] = Carlos
 
 while True:
     clear()
     a = painel_apresentacao()
     if a == '1':
         login = input('Digite seu login: ')
-        if login in bd_clientes.keys() or login in bd_colaboradores.keys():
+        if login in bd_clientes.keys():
             cliente = bd_clientes[login]  
             senha = input('Digite sua senha: ')
             if cliente.checa_senha(senha):
@@ -426,18 +719,24 @@ while True:
             print('Este login não está cadastrado.')
             time.sleep(2)
     elif a == '2':
-        pass
+        login = input('Digite seu login: ')
+        if login in bd_colaboradores.keys() or login in bd_colaboradores.keys():
+            colaborador = bd_colaboradores[login]  
+            senha = input('Digite sua senha: ')
+            if colaborador.checa_senha(senha):
+                conta_colaborador(colaborador, bd_clientes, bd_colaboradores)
+            else:
+                print('\nSenha incorreta.')
+                time.sleep(2)
+        else:
+            print('Este login não está cadastrado.')
+            time.sleep(2)
+     
     elif a == '3':
         break
 
-
-'''
-client = bd_clientes['douglas']
-print(f'{client.limite}')
-client = bd_clientes['douglas']
-client.limite= 123
-print(f'{client.limite}')'''
-
+print(bd_colaboradores)
+print(bd_clientes)
 
 
 
