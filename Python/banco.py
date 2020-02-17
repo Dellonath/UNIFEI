@@ -1,6 +1,42 @@
 import os  # import para os.system('clear')
 import time  # import para time.sleep()
 from passlib.hash import pbkdf2_sha256 as cryp # import para criptografia de senhas
+from colorama import Fore, Back, Style, init # import para fontes coloridas
+import sys # necessário importar para readchar() 
+import tty # necessário importar para readchar() 
+import termios # necessário importar para readchar()
+from datetime import datetime # usado para datetime.now() para informar a data atual
+
+def readchar(): # esta é a implementação do readchar(), esta função cumpre a função do input() mas sem exigir a tecla Enter
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+def painel_apresentacao():
+    print(Style.BRIGHT + Fore.CYAN + 'BEM-VINDO AO ACADY')
+    print(Style.BRIGHT + Fore.CYAN + 'O seu banco amigo\n')
+    print(Fore.CYAN + 'Pressione 1 para Login.')
+    print(Fore.CYAN + 'Pressione 2 para Registrar.\n')
+    return readchar()
+
+def painel_cliente(objeto):
+    print(Style.BRIGHT + Fore.CYAN + f'Olá, {objeto.nome_completo}, bem-vindo à sua ACADY Account.')
+    print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.")
+    print(Fore.CYAN + 'Abaixo há algumas opções, pressione o que você deseja fazer: ')
+    print(Fore.CYAN + '1 - Depositar ')
+    print(Fore.CYAN + '2 - Sacar ')
+    print(Fore.CYAN + '3 - Transferir')
+    print(Fore.CYAN + '4 - Consultar ')
+    print(Fore.CYAN + '2 - Sacar ')
+    print(Fore.CYAN + '3 - Transferir')
+    print(Fore.CYAN + '1 - Depositar ')
+    print(Fore.CYAN + '2 - Sacar ')
+    print(Fore.CYAN + '3 - Transferir')
 
 class Pessoa:
     '''Classe responsável por qualquer instância relacionada à uma pessoa física, seja cliente ou funcionário.'''
@@ -42,9 +78,6 @@ class Pessoa:
             return False
 
     # declarando as propriedades da classe Pessoa
-    @property
-    def nome_completo(self):
-        return f'{self.__nome} {self.__sobrenome}'
 
     @property
     def nome(self):
@@ -127,7 +160,7 @@ class Cliente(Pessoa):
 
     @property
     def conta(self):
-        return f'2276 {self.__conta}-5'
+        return f'2276-4 {self.__conta}-5'
 
     @property
     def renda(self):
@@ -140,20 +173,11 @@ class Cliente(Pessoa):
     @property
     def saldo(self):
         return f'{self.__saldo}'   
-        
-    @renda.setter
-    def renda(self, renda):
-        if Pessoa.apenas_numeros(self.renda, renda):
-            self.__renda = renda
+
     @limite.setter
-    def limite(self, limite):
+    def limite(self, limite, destino):
         if Pessoa.apenas_numeros(self.__limite, limite):
             self.__limite = limite
-
-    @saldo.setter
-    def saldo(self, saldo):
-        if Pessoa.apenas_numeros(self.__saldo, saldo):
-            self.__saldo = saldo
 
     def depositar(self, valor):
         if valor < 0:
@@ -161,6 +185,23 @@ class Cliente(Pessoa):
             print('Apenas valores positivos para depósito. Obrigado.')
             time.sleep(2)
             return
+        clear()
+        print(f'DEPOSITAR\nNome: {self.nome} {self.sobrenome}\nConta: {self.conta}')
+        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}')
+        a = input("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
+        if a == 's':
+            self.__saldo -= valor
+            clear()
+            print('Insira o dinheiro no compartimento abaixo.')
+            time.sleep(2)
+        elif a == 'n':
+            clear()
+            print('Operação cancelada.')
+            time.sleep(2)
+        else:
+            clear()
+            print('Comando não identificado. Operação cancelada.')
+            time.sleep(2)
         self.__saldo += valor
 
     def sacar(self, valor):
@@ -169,15 +210,58 @@ class Cliente(Pessoa):
             print('Apenas valores positivos para saque. Obrigado.')
             time.sleep(2)
             return
-        self.__saldo -= valor
+        if self.__saldo < valor:
+            clear()
+            print('Não há saldo suficiente para esta ação. Obrigado.')
+            time.sleep(2)
+            return
+        clear()
+        print(f'SACAR\nNome: {self.nome} {self.sobrenome}\nConta: {self.conta}')
+        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}')
+        a = input("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
+        if a == 's':
+            self.__saldo -= valor
+            clear()
+            print('Retire seu dinheiro.')
+            time.sleep(2)
+        elif a == 'n':
+            clear()
+            print('Operação cancelada.')
+            time.sleep(2)
+        else:
+            clear()
+            print('Comando não identificado. Operação cancelada.')
+            time.sleep(2)
 
     def transferir(self, valor, destino):
         if valor < 0:
+            clear()
             print('Apenas valores positivos para transferência. Obrigado.')
             time.sleep(2)
             return
-        self.__saldo -= valor
-        destino.__saldo += valor 
+        if self.__saldo < valor:
+            clear()
+            print('Não há saldo suficiente para esta ação. Obrigado.')
+            time.sleep(2)
+            return
+        print(f'TRANSFERIR\nDe: {self.nome} {self.sobrenome} \nConta: {self.conta}\nCPF originário: {self.cpf}')
+        print(f'Para: {destino.nome} {destino.sobrenome} \nConta: {destino.conta}\nCPF destinatário: {destino.cpf}')
+        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}')
+        a = input("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
+        if a == 's':
+            self.__saldo -= valor
+            destino.__saldo += valor
+            clear()
+            print('Transferência executada com sucesso.')
+            time.sleep(2)
+        elif a == 'n':
+            clear()
+            print('Operação cancelada.')
+            time.sleep(2)
+        else:
+            clear()
+            print('Comando não identificado. Operação cancelada.')
+            time.sleep(2)             
 
 class Funcionario(Pessoa):
 
@@ -191,19 +275,29 @@ class Funcionario(Pessoa):
 
     @property
     def matricula(self):
-    	return f'{self.__matricula}'
+        return f'{self.__matricula}'
 
     @property
     def setor(self):
-    	return f'{self.__setor}'
+        return f'{self.__setor}'
 
     @setor.setter
     def setor(self, setor):
-        self.__saldo = saldo
+        self.__setor = setor
 
 clear = lambda: os.system('clear') # criando função lambda para simplificação de uso
+init(autoreset=True) # iniciando o init do colorama
+agora = datetime.now() # definindo a variável atual para obter tempo atual 
 
+douglas = Cliente('NOME', 'SOBRENOME', 123456789, 25, 'ENDERECO', 'LOGIN', 'SENHA', 1000, 1000, 1000)
+mario = Cliente('NOME2', 'SOBRENOME2', 987654321, 23, 'ENDERECO2', 'LOGIN2', 'SENHA2', 2000, 2000, 2000)
 
+print(douglas.saldo)
+print(mario.saldo)
+douglas.sacar(400)
+douglas.transferir(300, mario)
+print(douglas.saldo)
+print(mario.saldo)
 
 
 
