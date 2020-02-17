@@ -33,7 +33,7 @@ def painel_cliente(cliente):
     print(Fore.CYAN + '1 - Depositar')
     print(Fore.CYAN + '2 - Sacar')
     print(Fore.CYAN + '3 - Transferir')
-    print(Fore.CYAN + '4 - Consultar Extrato')
+    print(Fore.CYAN + '4 - Consultar extrato')
     print(Fore.CYAN + '5 - Sair')
     return readchar()
 
@@ -166,7 +166,8 @@ class Cliente(Pessoa):
         self.__conta = Cliente.__conta + 13  
         self.__renda = renda
         self.__limite = limite
-        self.__saldo = saldo    
+        self.__saldo = saldo
+        self.__atividades = []
         Cliente.__conta = self.__conta # atualiza o valor do número conta da sub-classe Cliente
 
     @property
@@ -181,6 +182,15 @@ class Cliente(Pessoa):
     def limite(self):
         return f'{self.__limite}'
 
+    @property
+    def atividades(self):
+        clear()
+        print(f'Extrato Bancário {agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\n')
+        k = 1
+        for i in self.__atividades: 
+            print(f'{k} - {i[0]} {i[1]} {i[2]} {i[3]}\n')
+            k += 1
+  
     @property
     def saldo(self):
         return f'{self.__saldo}'   
@@ -198,10 +208,11 @@ class Cliente(Pessoa):
             return
         clear()
         print(f'DEPOSITAR\nNome: {self.nome} {self.sobrenome}\nConta: {self.conta}')
-        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}')
+        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}\n')
         a = input("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
         if a == 's':
-            self.__saldo -= valor
+            self.__saldo += valor
+            self.__atividades.append([f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}', 'Depósito', f'R${valor}',  None])
             clear()
             print('Insira o dinheiro no compartimento abaixo.')
             time.sleep(2)
@@ -228,10 +239,11 @@ class Cliente(Pessoa):
             return
         clear()
         print(f'SACAR\nNome: {self.nome} {self.sobrenome}\nConta: {self.conta}')
-        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}')
+        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}\n')
         a = input("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
         if a == 's':
             self.__saldo -= valor
+            self.__atividades.append([f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}','Saque', f'R${valor}',  None])
             clear()
             print('Retire seu dinheiro.')
             time.sleep(2)
@@ -255,11 +267,13 @@ class Cliente(Pessoa):
             print('Não há saldo suficiente para esta ação. Obrigado.')
             time.sleep(2)
             return
+        clear()
         print(f'TRANSFERIR\nDe: {self.nome} {self.sobrenome} \nConta: {self.conta}\nCPF originário: {self.cpf}')
         print(f'Para: {destino.nome} {destino.sobrenome} \nConta: {destino.conta}\nCPF destinatário: {destino.cpf}')
-        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}')
+        print(f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}\nR${valor}\n')
         a = input("Pressione 's' para confirmar a ação ou 'n' para cancelar: ")
         if a == 's':
+            self.__atividades.append([f'{agora.day}/{agora.month}/{agora.year} {agora.hour}:{agora.minute}:{agora.second}', 'Transferência', f'R${valor}', f'{destino.nome} {destino.sobrenome}', ])
             self.__saldo -= valor
             destino.__saldo += valor
             clear()
@@ -303,15 +317,14 @@ agora = datetime.now() # definindo a variável atual para obter tempo atual
 douglas = Cliente('NOME', 'SOBRENOME', 123456789, 25, 'ENDERECO', 'LOGIN', 'SENHA', 1000, 1000, 1000)
 mario = Cliente('NOME2', 'SOBRENOME2', 987654321, 23, 'ENDERECO2', 'LOGIN2', 'SENHA2', 2000, 2000, 2000)
 
-painel_cliente(douglas)
-'''
-print(douglas.saldo)
-print(mario.saldo)
+
 douglas.sacar(400)
+douglas.depositar(300)
 douglas.transferir(300, mario)
-print(douglas.saldo)
-print(mario.saldo)
-'''
+douglas.atividades
+
+
+
 
 
 
