@@ -1,3 +1,17 @@
+'''
+ESTE CÓDIGO SIMULA UM BANCO DE CRÉDITOS, NELE HÁ TRÊS ENTIDADES (CLIENTE, COLABORADOR RH E COLABORADOR CAIXA), ORIUNDOS DE UMA CLASSE PESSOA
+QUE TEM COMO SUB-CLASSES CLIENTE E COLABORADOR, CADA UM DESTE COM SEUS ATRIBUTOS E MÉTODOS, ALGUNS DETALHES BÁSICOS E IMPORTANTES:
+
+    1 - COLABORADOR RH NÃO PODE ALTERAR DADOS DE CLIENTES, APENAS ADICIONAR, REMOVER, ALTERAR OU CONSULTAR COLABORADORES, SEJA RH OU CAIXA;
+    2 - COLABORADOR CAIXA NÃO PODE ALTERAR DADOS DE COLABORADORES, APENAS ADICIONAR, REMOVER, ALTERAR OU CONSULTAR CLIENTES;
+    3 - DE INÍCIO, HÁ APENAS O COLABORADOR RH 'admin', PARA ACESSÁ-LO O USUÁRIO DEVE USAR 'admin' COMO LOGIN E 'admin' COMO SENHA, E SEGUIDA VOCÊ DEVE 
+CADASTRAR UM OUTRO COLABORADOR DO TIPO CAIXA, LOGAR NESTE COLABORADOR CAIXA, PARA ENTÃO ESTE CADASTRAR UM CLIENTE;
+    4 - CRIADO POR DOUGLAS R. O. SILVA (dellonath@gmail.com), ALUNO DE CIÊNCIA DA COMPUTAÇÃO NA UNIVERSIDADE FEDERAL DE ITAJUBÁ;
+    5 - ESTE PEQUENO SIMULADOR FOI DESENVOLVIDO PARA FINS DIDÁDICOS, PROCUREI INSERIR NESTE SIMULADOR DIVERSAS FERRAMENTAS E BIBLIOTECAS QUE APRENDI 
+DURANTE MEU APRENDIZADO, AFIM DE ABRANGIR TODAS AS FERRAMENTAS (OU MAIORIA DELAS) QUE CONHEÇO;
+
+'''
+
 import os  # import para os.system('clear')
 import time  # import para time.sleep()
 from passlib.hash import pbkdf2_sha256 as cryp # import para criptografia de senhas
@@ -265,7 +279,7 @@ def conta_colaborador_cx(colaborador, bd):
                 print(f'Conta: {cliente.conta}')
                 print(f'Renda: {cliente.renda}')
                 print(f'Saldo: {cliente.saldo}')
-                print(f'Limite: {cliente.limite}\n')
+                print(f'Limite: {cliente.limite}')
                 input('Pressione Enter para sair. ')
         elif a == '4':
             clear()
@@ -1118,6 +1132,7 @@ clear = lambda: os.system('clear') # criando função lambda para simplificaçã
 init(autoreset=True) # iniciando o init do colorama
 agora = datetime.now() # definindo a variável atual para obter tempo atual
 bd = {} # banco de dados de clientes
+
 admin = Colaborador('Admin', '', '', '', '', '', '', 'admin', 'admin', 'Rh') # definindo um rh padrão para cadastramento de outros colaboradores
 bd['admin'] = admin
 
