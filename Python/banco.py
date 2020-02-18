@@ -22,8 +22,7 @@ def painel_apresentacao():
     print(Style.BRIGHT + Fore.CYAN + 'O seu banco amigo\n')
     print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
     print('1 - Login.')
-    print('2 - Sistema Interno (Acesso Restrito à Colaboradores).')
-    print('3 - Sair.\n')
+    print('2 - Sair.\n')
     return readchar().upper()
 
 def painel_cliente(cliente):
@@ -63,6 +62,15 @@ def painel_colaborador_rh(colaborador):
     print('5 - Sair ')
     return readchar().upper()
 
+def obrigatorio(arg): # verifica se o arg é vazio
+    if arg == '':
+        clear()
+        print('Este campo é obrigatório.')
+        time.sleep(2)
+        clear()
+        return False
+    return True
+
 def conta_colaborador_cx(colaborador, bd):
     while True:
         clear()
@@ -73,36 +81,29 @@ def conta_colaborador_cx(colaborador, bd):
             print('Abaixo, insira os dados do cliente: \n')
             while True:
                 nome = input('Digite o Nome: ').title()
-                if Pessoa.apenas_letras(nome):
+                if Pessoa.apenas_letras(nome) and obrigatorio(nome):
                     break
             while True:
                 sobrenome = input('Digite o Sobrenome: ').title()
-                if Pessoa.apenas_letras(sobrenome):
+                if Pessoa.apenas_letras(sobrenome) and obrigatorio(sobrenome):
                     break
             while True:
                 cpf = input('Digite o CPF: ')
                 d = True
-                for client in bd.values():
-                    if cpf == client.cpf:
-                        clear()
-                        print('Este CPF já foi cadastrado.')
-                        time.sleep(2)
-                        clear()
-                        d = False
+                if obrigatorio(cpf):
+                    for client in bd.values():
+                        if cpf == client.cpf:
+                            clear()
+                            print('Este CPF já foi cadastrado.')
+                            time.sleep(2)
+                            clear()
+                            d = False
+                            break
+                    if d and Pessoa.apenas_numeros(cpf):
                         break
-                for client in bd.values():
-                    if cpf == client.cpf:
-                        clear()
-                        print('Este CPF já foi cadastrado.')
-                        time.sleep(2)
-                        clear()
-                        d = False
-                        break
-                if d and Pessoa.apenas_numeros(cpf):
-                    break
             while True:
                 idade = input('Digite a Idade: ')
-                if Pessoa.apenas_numeros(idade):
+                if obrigatorio(idade) and Pessoa.apenas_numeros(idade):
                     break
             while True:
                 sexo = input('Digite o Sexo: ').upper()
@@ -115,25 +116,21 @@ def conta_colaborador_cx(colaborador, bd):
             while True:
                 clear()
                 endereco = input('Digite a Cidade: ').title()
-                if Pessoa.apenas_letras(endereco):
+                if obrigatorio(endereco) and Pessoa.apenas_letras(endereco):
                     break
             while True:
                 telefone = input('Digite o Telefone: ')
-                if Pessoa.apenas_numeros(telefone):
+                if obrigatorio(telefone) and Pessoa.apenas_numeros(telefone):
                     break
             while True:
                 clear()
                 login = input('Digite o Login: ')
-                if login in bd.keys() or login in bd.keys():
+                if obrigatorio(login) and login in bd.keys():
                     clear()
                     print('Este login já foi cadastrado.')
                     time.sleep(2)
-                if login:
+                if obrigatorio(login) and not login in bd.keys():
                     break
-                else:
-                    clear()
-                    print('Campo obrigatório.')
-                    time.sleep(2)
             while True:
                 clear()
                 senha = input('Digite a Senha: ')
@@ -145,20 +142,20 @@ def conta_colaborador_cx(colaborador, bd):
                     time.sleep(2)
             while True:
                 clear()
-                renda = int(input('Digite a Renda Inicial: '))
-                if Pessoa.apenas_numeros(renda):
+                renda = input('Digite a Renda Inicial: ')
+                if obrigatorio(renda) and Pessoa.apenas_numeros(renda):
                     renda = int(renda)
                     break
             while True:
                 clear()
                 limite = input('Digite o Limite Inicial: ')
-                if Pessoa.apenas_numeros(limite):
+                if obrigatorio(limite) and Pessoa.apenas_numeros(limite):
                     limite = int(limite)
                     break
             while True:
                 clear()
                 saldo = input('Digite o Saldo Inicial: ')
-                if Pessoa.apenas_numeros(saldo):
+                if obrigatorio(saldo) and Pessoa.apenas_numeros(saldo):
                     saldo = int(saldo)
                     break          
             while True:
@@ -202,7 +199,7 @@ def conta_colaborador_cx(colaborador, bd):
         elif a == '2':
             clear()
             login = input('Digite o Login do cliente que deseja remover: ')
-            if login in bd.keys():
+            if obrigatorio(login) and login in bd.keys():
                 cliente = bd[login]
                 a = True
             else:
@@ -246,7 +243,7 @@ def conta_colaborador_cx(colaborador, bd):
             clear()
             login = input('Digite o Login do cliente que deseja consultar: ')
             clear()
-            if login in bd.keys():
+            if obrigatorio(login) and login in bd.keys():
                 cliente = bd[login]
                 a = True
             else:
@@ -274,7 +271,7 @@ def conta_colaborador_cx(colaborador, bd):
             clear()
             login = input('Digite o Login do cliente que deseja alterar: ')
             clear()
-            if login in bd.keys():
+            if obrigatorio(login) and login in bd.keys():
                 cliente = bd[login]
                 a = True
             else:
@@ -299,130 +296,131 @@ def conta_colaborador_cx(colaborador, bd):
                 print(f'Saldo: {cliente.saldo}')
                 print(f'Limite: {cliente.limite}\n')
                 a = input('Digite o dado que deseja alterar: ').upper()
-            if a == 'NOME':
-                clear()
-                nome = input('Digite um Nome: ').title()
-                if Pessoa.apenas_letras(nome):
+                if a == 'NOME':
                     clear()
-                    print(f'Nome alterado de {cliente.nome} para {nome} com sucesso.')
+                    nome = input('Digite um Nome: ').title()
+                    if Pessoa.apenas_letras(nome):
+                        clear()
+                        print(f'Nome alterado de {cliente.nome} para {nome} com sucesso.')
+                        time.sleep(2)
+                        cliente.nome = nome
+                        clear()
+                elif a == 'SOBRENOME':
+                    clear()
+                    sobrenome = input('Digite um Sobrenome: ').title()
+                    if Pessoa.apenas_letras(sobrenome):
+                        clear()
+                        print(f'Sobrenome alterado de {cliente.sobrenome} para {sobrenome} com sucesso.')
+                        time.sleep(2)
+                        cliente.sobrenome = sobrenome
+                        clear()
+                elif a == 'CPF':
+                    clear()
+                    cpf = input('Digite um CPF: ')
+                    if obrigatorio(cpf) and Pessoa.apenas_numeros(cpf):
+                        clear()
+                        print(f'CPF alterado de {cliente.cpf} para {cpf} com sucesso.')
+                        time.sleep(2)
+                        cliente.cpf = cpf
+                        clear()
+                elif a == 'Idade':
+                    clear()
+                    idade = input('Digite uma Idade: ')
+                    if obrigatorio(idade) and Pessoa.apenas_numeros(idade):
+                        clear()
+                        print(f'Idade alterada de {cliente.idade} para {idade} com sucesso.')
+                        time.sleep(2)
+                        cliente.idade = idade
+                        clear()
+                elif a == 'SEXO':
+                    clear()
+                    sexo = input('Digite um Sexo: ').upper()
+                    if sexo == 'F' or sexo == 'M':
+                        clear()
+                        print(f'Sexo alterado de {cliente.sexo} para {sexo} com sucesso.')
+                        time.sleep(2)
+                        cliente.sexo = sexo
+                        clear()
+                    else:
+                        clear()
+                        print('Sexo não reconhecido. Operação cancelada.')
+                        time.sleep(2)
+                        clear()
+                elif a == 'ENDEREÇO':
+                    clear()
+                    endereco = input('Digite um Endereço: ').title()
+                    if obrigatorio(endereco) and Pessoa.apenas_letras(endereco):
+                        clear()
+                        print(f'Endereço alterado de {cliente.endereco} para {endereco} com sucesso.')
+                        time.sleep(2)
+                        cliente.endereco = endereco
+                        clear()
+                elif a == 'TELEFONE':
+                    clear()
+                    telefone = input('Digite um Telefone: ').title()
+                    if obrigatorio(telefone) and Pessoa.apenas_numeros(telefone):
+                        clear()
+                        print(f'Telefone alterado de {cliente.telefone} para +55 035 {telefone} com sucesso.')
+                        time.sleep(2)
+                        cliente.telefone = telefone
+                        clear()
+                elif a == 'LOGIN':
+                    clear()
+                    login = input('Digite um Login: ')
+                    if obrigatorio(login):
+                        clear()
+                        print(f'Login alterado de {cliente.login} para {login} com sucesso.')
+                        bd.pop(cliente.login)
+                        bd[login] = cliente
+                        time.sleep(2)
+                        cliente.login = login
+                        clear()
+                elif a == 'SENHA':
+                    clear()
+                    if obrigatorio(senha):
+                        senha = input('Digite uma Senha: ')
+                        clear()
+                        print(f'Senha alterada com sucesso.')
+                        time.sleep(2)
+                        cliente.senha = senha
+                        clear()
+                elif a == 'CONTA':
+                    clear()
+                    print('O dado Conta não pode ser alterado.')
                     time.sleep(2)
-                    cliente.nome = nome
                     clear()
-            elif a == 'SOBRENOME':
-                clear()
-                sobrenome = input('Digite um Sobrenome: ').title()
-                if Pessoa.apenas_letras(sobrenome):
+                elif a == 'RENDA':
                     clear()
-                    print(f'Sobrenome alterado de {cliente.sobrenome} para {sobrenome} com sucesso.')
-                    time.sleep(2)
-                    cliente.sobrenome = sobrenome
+                    renda = input('Digite um valor para Renda: ')
+                    if obrigatorio(renda) and Pessoa.apenas_numeros(renda):
+                        clear()
+                        print(f'Renda alterada de {cliente.renda} para {renda} com sucesso.')
+                        time.sleep(2)
+                        cliente.renda = int(renda)
+                        clear()
+                elif a == 'SALDO':
                     clear()
-            elif a == 'CPF':
-                clear()
-                cpf = input('Digite um CPF: ')
-                if Pessoa.apenas_numeros(nome):
+                    saldo = input('Digite um valor para Saldo: ')
+                    if obrigatorio(saldo) and Pessoa.apenas_numeros(saldo):
+                        clear()
+                        print(f'Saldo alterado de {cliente.saldo} para {saldo} com sucesso.')
+                        time.sleep(2)
+                        cliente.saldo = int(saldo)
+                        clear()
+                elif a == 'LIMITE':
                     clear()
-                    print(f'CPF alterado de {cliente.cpf} para {cpf} com sucesso.')
-                    time.sleep(2)
-                    cliente.cpf = cpf
-                    clear()
-            elif a == 'Idade':
-                clear()
-                idade = input('Digite uma Idade: ')
-                if Pessoa.apenas_numeros(idade):
-                    clear()
-                    print(f'Idade alterada de {cliente.idade} para {idade} com sucesso.')
-                    time.sleep(2)
-                    cliente.idade = idade
-                    clear()
-            elif a == 'SEXO':
-                clear()
-                sexo = input('Digite um Sexo: ').upper()
-                if sexo == 'F' or sexo == 'M':
-                    clear()
-                    print(f'Sexo alterado de {cliente.sexo} para {sexo} com sucesso.')
-                    time.sleep(2)
-                    cliente.sexo = sexo
-                    clear()
+                    limite = input('Digite um valor para Limite: ')
+                    if obrigatorio(limite) and Pessoa.apenas_numeros(limite):
+                        clear()
+                        print(f'Limite alterado de {cliente.limite} para {limite} com sucesso.')
+                        time.sleep(2)
+                        cliente.limite = int(limite)
+                        clear()
                 else:
                     clear()
-                    print('Sexo não reconhecido. Operação cancelada.')
+                    print('Comando não reconhecido. Operação cancelada.')
                     time.sleep(2)
                     clear()
-            elif a == 'ENDEREÇO':
-                clear()
-                endereco = input('Digite um Endereço: ').title()
-                if Pessoa.apenas_letras(endereco):
-                    clear()
-                    print(f'Endereço alterado de {cliente.endereco} para {endereco} com sucesso.')
-                    time.sleep(2)
-                    cliente.endereco = endereco
-                    clear()
-            elif a == 'TELEFONE':
-                clear()
-                telefone = input('Digite um Telefone: ').title()
-                if Pessoa.apenas_numeros(telefone):
-                    clear()
-                    print(f'Telefone alterado de {cliente.telefone} para +55 035 {telefone} com sucesso.')
-                    time.sleep(2)
-                    cliente.telefone = telefone
-                    clear()
-            elif a == 'LOGIN':
-                clear()
-                login = input('Digite um Login: ')
-                clear()
-                print(f'Login alterado de {cliente.login} para {login} com sucesso.')
-                bd.pop(cliente.login)
-                bd[login] = cliente
-                time.sleep(2)
-                cliente.login = login
-                clear()
-            elif a == 'SENHA':
-                clear()
-                senha = input('Digite uma Senha: ')
-                clear()
-                print(f'Senha alterada com sucesso.')
-                time.sleep(2)
-                cliente.senha = senha
-                clear()
-            elif a == 'CONTA':
-                clear()
-                print('O dado Conta não pode ser alterado.')
-                time.sleep(2)
-                clear()
-            elif a == 'RENDA':
-                clear()
-                renda = input('Digite um valor para Renda: ')
-                if Pessoa.apenas_numeros(renda):
-                    clear()
-                    print(f'Renda alterada de {cliente.renda} para {renda} com sucesso.')
-                    time.sleep(2)
-                    cliente.renda = renda
-                    clear()
-            elif a == 'SALDO':
-                clear()
-                saldo = input('Digite um valor para ser adicionado ao Saldo: ')
-                if Pessoa.apenas_numeros(saldo):
-                    clear()
-                    print(f'Saldo alterado de {cliente.renda} para {cliente.renda + renda} com sucesso.')
-                    time.sleep(2)
-                    cliente.renda += renda
-                    clear()
-            elif a == 'LIMITE':
-                clear()
-                limite = input('Digite um valor para Limite: ')
-                if Pessoa.apenas_numeros(limite):
-                    clear()
-                    print(f'Limite alterado de {cliente.limite} para {cliente.limite} com sucesso.')
-                    time.sleep(2)
-                    cliente.limite = limite
-                    clear()
-            else:
-                clear()
-                print('Comando não reconhecido. Operação cancelada.')
-                time.sleep(2)
-                clear()
-
         elif a == '5':
             clear()
             print('Logout concluído com sucesso.')
@@ -440,36 +438,29 @@ def conta_colaborador_rh(colaborador, bd):
             print('Abaixo, insira os dados do colaborador: \n')
             while True:
                 nome = input('Digite o Nome: ').title()
-                if Pessoa.apenas_letras(nome):
+                if Pessoa.apenas_letras(nome) and obrigatorio(nome):
                     break
             while True:
                 sobrenome = input('Digite o Sobrenome: ').title()
-                if Pessoa.apenas_letras(sobrenome):
+                if Pessoa.apenas_letras(sobrenome) and obrigatorio(sobrenome):
                     break
             while True:
                 cpf = input('Digite o CPF: ')
                 d = True
-                for client in bd.values():
-                    if cpf == client.cpf:
-                        clear()
-                        print('Este CPF já foi cadastrado.')
-                        time.sleep(2)
-                        clear()
-                        d = False
+                if obrigatorio(cpf):
+                    for i in bd.values():
+                        if cpf == i.cpf:
+                            clear()
+                            print('Este CPF já foi cadastrado.')
+                            time.sleep(2)
+                            clear()
+                            d = False
+                            break
+                    if d and Pessoa.apenas_numeros(cpf):
                         break
-                for client in bd.values():
-                    if cpf == client.cpf:
-                        clear()
-                        print('Este CPF já foi cadastrado.')
-                        time.sleep(2)
-                        clear()
-                        d = False
-                        break
-                if d and Pessoa.apenas_numeros(cpf):
-                    break
             while True:
                 idade = input('Digite a Idade: ')
-                if Pessoa.apenas_numeros(idade):
+                if obrigatorio(idade) and Pessoa.apenas_numeros(idade):
                     break
             while True:
                 sexo = input('Digite o Sexo: ').upper()
@@ -482,16 +473,16 @@ def conta_colaborador_rh(colaborador, bd):
             while True:
                 clear()
                 endereco = input('Digite a Cidade: ').title()
-                if Pessoa.apenas_letras(endereco):
+                if obrigatorio(endereco) and Pessoa.apenas_letras(endereco):
                     break
             while True:
                 telefone = input('Digite o Telefone: ')
-                if Pessoa.apenas_numeros(telefone):
+                if obrigatorio(telefone) and Pessoa.apenas_numeros(telefone):
                     break
             while True:
                 clear()
                 login = input('Digite o Login: ')
-                if login in bd.keys() or login in bd.keys():
+                if obrigatorio(login) and login in bd.keys():
                     clear()
                     print('Este login já foi cadastrado.')
                     time.sleep(2)
@@ -561,7 +552,7 @@ def conta_colaborador_rh(colaborador, bd):
         elif a == '2':
             clear()
             login = input('Digite o Login do colaborador que deseja remover: ')
-            if login in bd.keys():
+            if obrigatorio(login) and login in bd.keys():
                 colaborador = bd[login]
                 a = True
             else:
@@ -602,7 +593,7 @@ def conta_colaborador_rh(colaborador, bd):
             clear()
             login = input('Digite o Login do Colaborador que deseja consultar: ')
             clear()
-            if login in bd.keys():
+            if obrigatorio(login) and login in bd.keys():
                 colaborador = bd[login]
                 a = True
             else:
@@ -627,7 +618,7 @@ def conta_colaborador_rh(colaborador, bd):
             clear()
             login = input('Digite o Login do colaborador que deseja alterar: ')
             clear()
-            if login in bd.keys():
+            if obrigatorio(login) and login in bd.keys():
                 colaborador = bd[login]
                 b = True
             else:
@@ -670,7 +661,7 @@ def conta_colaborador_rh(colaborador, bd):
                 elif a == 'CPF':
                     clear()
                     cpf = input('Digite um CPF: ')
-                    if Pessoa.apenas_numeros(cpf):
+                    if obrigatorio(cpf) and Pessoa.apenas_numeros(cpf):
                         clear()
                         print(f'CPF alterado de {colaborador.cpf} para {cpf} com sucesso.')
                         time.sleep(2)
@@ -679,7 +670,7 @@ def conta_colaborador_rh(colaborador, bd):
                 elif a == 'IDADE':
                     clear()
                     idade = input('Digite uma Idade: ')
-                    if Pessoa.apenas_numeros(idade):
+                    if obrigatorio(idade) and Pessoa.apenas_numeros(idade):
                         clear()
                         print(f'Idade alterada de {colaborador.idade} para {idade} com sucesso.')
                         time.sleep(2)
@@ -702,7 +693,7 @@ def conta_colaborador_rh(colaborador, bd):
                 elif a == 'ENDEREÇO':
                     clear()
                     endereco = input('Digite um Endereço: ').title()
-                    if Pessoa.apenas_letras(endereco):
+                    if obrigatorio(endereco) and Pessoa.apenas_letras(endereco):
                         clear()
                         print(f'Endereço alterado de {colaborador.endereco} para {endereco} com sucesso.')
                         time.sleep(2)
@@ -711,7 +702,7 @@ def conta_colaborador_rh(colaborador, bd):
                 elif a == 'TELEFONE':
                     clear()
                     telefone = input('Digite um Telefone: ').title()
-                    if Pessoa.apenas_numeros(telefone):
+                    if obrigatorio(telefone) and Pessoa.apenas_numeros(telefone):
                         clear()
                         print(f'Telefone alterado de {colaborador.telefone} para +55 035 {telefone} com sucesso.')
                         time.sleep(2)
@@ -720,13 +711,14 @@ def conta_colaborador_rh(colaborador, bd):
                 elif a == 'LOGIN':
                     clear()
                     login = input('Digite um Login: ')
-                    clear()
-                    print(f'Login alterado de {colaborador.login} para {login} com sucesso.')
-                    bd.pop(colaborador.login)
-                    bd[login] = colaborador
-                    time.sleep(2)
-                    colaborador.login = login
-                    clear()
+                    if obrigatorio(login):
+                        clear()
+                        print(f'Login alterado de {colaborador.login} para {login} com sucesso.')
+                        bd.pop(colaborador.login)
+                        bd[login] = colaborador
+                        time.sleep(2)
+                        colaborador.login = login
+                        clear()                  
                 elif a == 'SENHA':
                     clear()
                     senha = input('Digite uma Senha: ')
@@ -844,7 +836,7 @@ class Pessoa:
         for i in range(10):
             if str(i) in arg0:
                 clear()
-                print(f'Digite apenas letras. Por favor.')
+                print(f'Digite apenas letras.')
                 time.sleep(2)
                 clear()
                 return False
@@ -859,7 +851,7 @@ class Pessoa:
             return True
         except:
             clear()
-            print('Digite apenas número. Por favor.')
+            print('Digite apenas número.')
             time.sleep(2)
             clear()
             return False
@@ -925,7 +917,7 @@ class Pessoa:
 
     @sexo.setter
     def sexo(self, sexo):
-        if Pessoa.apenas_letra(sexo):
+        if Pessoa.apenas_letras(sexo):
             self.__sexo = sexo
 
     @endereco.setter
@@ -991,8 +983,18 @@ class Cliente(Pessoa):
 
     @limite.setter
     def limite(self, limite):
-        if Pessoa.apenas_numeros(self.__limite, limite):
+        if Pessoa.apenas_numeros(limite):
             self.__limite = limite
+
+    @saldo.setter
+    def saldo(self, saldo):
+        if Pessoa.apenas_numeros(saldo):
+            self.__saldo = saldo
+
+    @renda.setter
+    def renda(self, renda):
+        if Pessoa.apenas_numeros(renda):
+            self.__renda = renda
 
     def depositar(self, valor):
         if valor < 0:
@@ -1116,9 +1118,17 @@ clear = lambda: os.system('clear') # criando função lambda para simplificaçã
 init(autoreset=True) # iniciando o init do colorama
 agora = datetime.now() # definindo a variável atual para obter tempo atual
 bd = {} # banco de dados de clientes
-
 admin = Colaborador('Admin', '', '', '', '', '', '', 'admin', 'admin', 'Rh') # definindo um rh padrão para cadastramento de outros colaboradores
 bd['admin'] = admin
+
+'''
+O CÓDIGO DENTRO DESSE COMENTÁRIO DEVE SER USADO APENAS PARA TESTE RÁPIDO DO SISTEMA
+
+admin2 = Colaborador('Admin', '', '', '', '', '', '', 'admin2', 'admin2', 'Caixa') # definindo um rh padrão para cadastramento de outros colaboradores
+usuario = Cliente('Nome', 'Sobrenome', '123456789', '21', 'M', 'Cidade', '991123789', 'login', 'senha', 1000, 1000 ,1000) # definindo um rh padrão para cadastramento de outros colaboradores
+bd['admin2'] = admin2
+bd['usuario'] = usuario
+'''
 
 while True:
     clear()
@@ -1129,7 +1139,13 @@ while True:
             cliente = bd[login]  
             senha = input('Digite sua senha: ')
             if cliente.checa_senha(senha):
-                conta_cliente(cliente)
+                if type(cliente) == Colaborador:
+                    if cliente.setor == 'Caixa':
+                        conta_colaborador_cx(cliente, bd)
+                    elif cliente.setor == 'Rh':
+                        conta_colaborador_rh(cliente, bd)
+                else:
+                    conta_cliente(cliente)
             else:
                 print('\nSenha incorreta.')
                 time.sleep(2)
@@ -1137,21 +1153,5 @@ while True:
             print('Este login não está cadastrado.')
             time.sleep(2)
     elif a == '2':
-        login = input('Digite seu login: ')
-        if login in bd.keys():
-            colaborador = bd[login]  
-            senha = input('Digite sua senha: ')
-            if colaborador.checa_senha(senha):
-                if colaborador.setor == 'Caixa':
-                    conta_colaborador_cx(colaborador, bd)
-                else:
-                    conta_colaborador_rh(colaborador, bd)
-            else:
-                print('\nSenha incorreta.')
-                time.sleep(2)
-        else:
-            print('Este login não está cadastrado.')
-            time.sleep(2) 
-    elif a == '3':
         clear()
         break
