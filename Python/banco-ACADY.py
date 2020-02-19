@@ -34,10 +34,10 @@ def readchar(): # esta é a implementação do readchar().upper(), esta função
 
 def painel_apresentacao():
     print(Style.BRIGHT + Fore.CYAN + 'BEM-VINDO AO ACADY')
-    print(Style.BRIGHT + Fore.CYAN + 'O seu banco amigo\n')
+    print(Style.BRIGHT + Fore.CYAN + 'A todo lugar, a todo momento, todo pra você!\n')
     print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
-    print('1 - Login.')
-    print('2 - Sair.\n')
+    print('1 - Login')
+    print('2 - Sair\n')
     return readchar().upper()
 
 def painel_cliente(cliente):
@@ -48,8 +48,8 @@ def painel_cliente(cliente):
     print('1 - Depositar')
     print('2 - Sacar')
     print('3 - Transferir')
-    print('4 - Consultar extrato/saldo')
-    print('5 - Consultar informações')
+    print('4 - Consultar Extrato/Saldo')
+    print('5 - Consultar Informações')
     print('6 - Sair')
     return readchar().upper()
 
@@ -58,10 +58,10 @@ def painel_colaborador_cx(colaborador):
     print(Fore.CYAN + 'COLABORADOR CAIXA')
     print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.\n")
     print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
-    print('1 - Criar cliente')
-    print('2 - Remover cliente ')
-    print('3 - Consultar cliente')
-    print('4 - Alterar cliente')
+    print('1 - Criar Cliente')
+    print('2 - Remover Cliente ')
+    print('3 - Consultar Cliente')
+    print('4 - Alterar Cliente')
     print('5 - Sair ')
     return readchar().upper()
 
@@ -70,10 +70,10 @@ def painel_colaborador_rh(colaborador):
     print(Fore.CYAN + 'COLABORADOR RH')
     print(Fore.CYAN + "Lembre-se de utilizar apenas 's' para SIM e 'n' para NÃO.\n")
     print('Abaixo há algumas opções, pressione o que você deseja fazer: ')
-    print('1 - Criar funcionário')
-    print('2 - Remover funcionário ')
-    print('3 - Consultar funcionário')
-    print('4 - Alterar funcionário')
+    print('1 - Criar Funcionário')
+    print('2 - Remover Funcionário ')
+    print('3 - Consultar Funcionário')
+    print('4 - Alterar Funcionário')
     print('5 - Sair ')
     return readchar().upper()
 
@@ -1198,3 +1198,5 @@ bd_login.remove('')
 with open('banco_de_dados.pickle', 'wb') as arq:
     for key in bd_login:
         pickle.dump(bd[key], arq)
+
+
