@@ -64,6 +64,18 @@ def deletar():
             print(f'Nome: {pessoas[cpf][0]}\nCPF: {cpf}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}\n')
             escolha = input('Deseja mesmo excluir esta pessoa (s/n)? ')
             if escolha == 's':
+                if pessoas[cpf][1] >= 18:
+                    dados['maioridade'] -= 1
+                if pessoas[cpf][2] == 'M':
+                    dados['homens'] -= 1
+                elif pessoas[cpf][2] == 'F':
+                    dados['mulheres'] -= 1
+                if pessoas[cpf][3] == 'VIP':
+                    dados['vip'] += 1
+                elif pessoas[cpf][3] == 'CAMAROTE':
+                    dados['camarote'] += 1
+                elif pessoas[cpf][3] == 'PISTA':
+                    dados['pista'] += 1
                 pessoas.pop(cpf)
                 input('Pessoa removida com sucesso. Pressione Enter.')
                 break
@@ -168,5 +180,3 @@ while True: # loop infito para retorno do painel principal
         sys.exit() # mantido aqui para fins didáticos, mas ele é completamente desnecessário, retirá-lo implica no mesmo resultado
     else:
         input('Digite uma das opções acima. Pressione Enter.')
-
-
