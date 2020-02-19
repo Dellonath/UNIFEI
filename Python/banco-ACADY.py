@@ -1,7 +1,6 @@
 '''
 ESTE CÓDIGO SIMULA UM BANCO DE CRÉDITOS, NELE HÁ TRÊS ENTIDADES (CLIENTE, COLABORADOR RH E COLABORADOR CAIXA), ORIUNDOS DE UMA CLASSE PESSOA
 QUE TEM COMO SUB-CLASSES CLIENTE E COLABORADOR, CADA UM DESTE COM SEUS ATRIBUTOS E MÉTODOS, ALGUNS DETALHES BÁSICOS E IMPORTANTES:
-
     1 - COLABORADOR RH NÃO PODE ALTERAR DADOS DE CLIENTES, APENAS ADICIONAR, REMOVER, ALTERAR OU CONSULTAR COLABORADORES, SEJA RH OU CAIXA;
     2 - COLABORADOR CAIXA NÃO PODE ALTERAR DADOS DE COLABORADORES, APENAS ADICIONAR, REMOVER, ALTERAR OU CONSULTAR CLIENTES;
     3 - DE INÍCIO, HÁ APENAS O COLABORADOR RH 'admin', PARA ACESSÁ-LO O USUÁRIO DEVE USAR 'admin' COMO LOGIN E 'admin' COMO SENHA, E SEGUIDA VOCÊ DEVE 
@@ -10,8 +9,7 @@ CADASTRAR UM OUTRO COLABORADOR DO TIPO CAIXA, LOGAR NESTE COLABORADOR CAIXA, PAR
     5 - ESTE PEQUENO SIMULADOR FOI DESENVOLVIDO PARA FINS DIDÁDICOS, PROCUREI INSERIR NESTE SIMULADOR DIVERSAS FERRAMENTAS E BIBLIOTECAS QUE APRENDI 
 DURANTE MEU APRENDIZADO, AFIM DE ABRANGIR TODAS AS FERRAMENTAS (OU MAIORIA DELAS) QUE CONHEÇO;
     6 - USEI UM DICIONÁRIO COMO "BANCO DE DADOS" CHAMADO 'bd', MAS O CORRETO SERIA TRABALHAR COM MySQL, CUJO QUAL AINDA NÃO CONHEÇO;
-    7 - HÁ AINDA 
-
+    7 - USEI PICKLE COMO DATABASE DO SISTEMA, ALÉM DE UM ARQUIVO .TXT PARA AUXILIAR NO ARMAZENAMENTO.
 '''
 
 import os  # import para os.system('clear')
@@ -22,6 +20,7 @@ import sys # necessário importar para readchar().upper()
 import tty # necessário importar para readchar().upper() 
 import termios # necessário importar para readchar().upper()
 from datetime import datetime # usado para datetime.now() para informar a data atual
+import pickle # import para utilização de pickle
 
 def readchar(): # esta é a implementação do readchar().upper(), esta função cumpre a função do input() mas sem exigir a tecla Enter
     fd = sys.stdin.fileno()
@@ -81,13 +80,10 @@ def painel_colaborador_rh(colaborador):
 def obrigatorio(arg): # verifica se o arg é vazio
     if arg == '':
         clear()
-        print('Este campo é obrigatório.')
-        time.sleep(2)
-        clear()
         return False
     return True
 
-def conta_colaborador_cx(colaborador, bd):
+def conta_colaborador_cx(colaborador, bd, bd_login):
     while True:
         clear()
         a = painel_colaborador_cx(colaborador)
@@ -150,12 +146,8 @@ def conta_colaborador_cx(colaborador, bd):
             while True:
                 clear()
                 senha = input('Digite a Senha: ')
-                if senha:
+                if obrigatorio(senha) and senha:
                     break
-                else:
-                    clear()
-                    print('Campo obrigatório.')
-                    time.sleep(2)
             while True:
                 clear()
                 renda = input('Digite a Renda Inicial: ')
@@ -192,8 +184,11 @@ def conta_colaborador_cx(colaborador, bd):
                 print('Deseja mesmo cadastrar este cliente (s/n): ')
                 a = readchar().upper()
                 if a == 'S':
-                    try:
+                    try:                  
+                        bd_login.append(login)
                         bd[login] = Cliente(nome, sobrenome, cpf, idade, sexo, endereco, telefone, login, senha, renda, limite, saldo)
+                        with open('banco_de_dados.pickle', 'wb') as arq:
+                            pickle.dump(bd[login], arq)
                     except:
                         clear()
                         print('Não foi possível efetuar o cadastro.')
@@ -221,6 +216,7 @@ def conta_colaborador_cx(colaborador, bd):
             else:
                 clear()
                 print('Este login não está cadastrado.')
+                a = False
                 time.sleep(2)
             if a:
                 clear()
@@ -241,6 +237,7 @@ def conta_colaborador_cx(colaborador, bd):
                 print('Deseja mesmo remover este Cliente (s/n): ')
                 a = readchar().upper()
                 if a == 'S':
+                    bd_login.remove(login)
                     bd.pop(login)
                     clear()
                     print('A conta foi apagada com sucesso.')
@@ -281,7 +278,7 @@ def conta_colaborador_cx(colaborador, bd):
                 print(f'Conta: {cliente.conta}')
                 print(f'Renda: {cliente.renda}')
                 print(f'Saldo: {cliente.saldo}')
-                print(f'Limite: {cliente.limite}')
+                print(f'Limite: {cliente.limite}\n')
                 input('Pressione Enter para sair. ')
         elif a == '4':
             clear()
@@ -393,8 +390,8 @@ def conta_colaborador_cx(colaborador, bd):
                         clear()
                 elif a == 'SENHA':
                     clear()
+                    senha = input('Digite uma Senha: ')
                     if obrigatorio(senha):
-                        senha = input('Digite uma Senha: ')
                         clear()
                         print(f'Senha alterada com sucesso.')
                         time.sleep(2)
@@ -444,7 +441,7 @@ def conta_colaborador_cx(colaborador, bd):
             clear()
             break
 
-def conta_colaborador_rh(colaborador, bd):
+def conta_colaborador_rh(colaborador, bd, bd_login):
     while True:
         clear()
         a = painel_colaborador_rh(colaborador)
@@ -546,7 +543,10 @@ def conta_colaborador_rh(colaborador, bd):
                 a = readchar().upper()
                 if a == 'S':
                     try:
+                        bd_login.append(login)
                         bd[login] = Colaborador(nome, sobrenome, cpf, idade, sexo, endereco, telefone, login, senha, setor)
+                        with open('banco_de_dados.pickle', 'wb') as arq:
+                            pickle.dump(bd[login], arq)
                     except:
                         clear()
                         print('Não foi possível efetuar o cadastro.')
@@ -591,6 +591,7 @@ def conta_colaborador_rh(colaborador, bd):
                 print('Deseja mesmo remover este colaborador (s/n): ')
                 a = readchar().upper()
                 if a == 'S':
+                    bd_login.remove(login)
                     bd.pop(login)
                     clear()
                     print('A conta foi apagada com sucesso.')
@@ -768,7 +769,7 @@ def conta_colaborador_rh(colaborador, bd):
             time.sleep(2)
             clear()
 
-def conta_cliente(cliente):
+def conta_cliente(cliente, bd_login):
     while True:
         clear()
         a = painel_cliente(cliente)
@@ -1134,21 +1135,29 @@ clear = lambda: os.system('clear') # criando função lambda para simplificaçã
 init(autoreset=True) # iniciando o init do colorama
 agora = datetime.now() # definindo a variável atual para obter tempo atual
 bd = {} # banco de dados de clientes
+bd_login = [] # banco de dados de cpf's
 
-admin = Colaborador('Admin', '', '', '', '', '', '', 'admin', 'admin', 'Rh') # definindo um rh padrão para cadastramento de outros colaboradores
+
+
+# COLABORADOR PADRÃO ADMIN
+admin = Colaborador('Admin', '', '', '', '', '', '', 'admin', 'admin', 'Rh') # definindo um rh padrão para cadastramento de outros colaboradorestramento de outros colaboradores
 bd['admin'] = admin
-
-'''
-O CÓDIGO DENTRO DESSE COMENTÁRIO DEVE SER USADO APENAS PARA TESTE RÁPIDO DO SISTEMA
-
-admin2 = Colaborador('Admin', '', '', '', '', '', '', 'admin2', 'admin2', 'Caixa') # definindo um rh padrão para cadastramento de outros colaboradores
-usuario = Cliente('Nome', 'Sobrenome', '123456789', '21', 'M', 'Cidade', '991123789', 'login', 'senha', 1000, 1000 ,1000) # definindo um rh padrão para cadastramento de outros colaboradores
-bd['admin2'] = admin2
-bd['usuario'] = usuario
-'''
 
 while True:
     clear()
+    try:
+        with open('banco_de_dados.txt', 'r') as arq:
+            arquivo = arq.read()
+            bd_login = arquivo.split('\n')
+    except:
+        pass
+
+    try:
+        with open('banco_de_dados.pickle', 'rb') as arq:
+            for key in bd_login:
+               bd[key] = pickle.load(arq)
+    except:
+        pass
     a = painel_apresentacao()
     if a == '1':
         login = input('Digite seu login: ')
@@ -1158,17 +1167,34 @@ while True:
             if cliente.checa_senha(senha):
                 if type(cliente) == Colaborador:
                     if cliente.setor == 'Caixa':
-                        conta_colaborador_cx(cliente, bd)
+                        conta_colaborador_cx(cliente, bd, bd_login)
                     elif cliente.setor == 'Rh':
-                        conta_colaborador_rh(cliente, bd)
+                        conta_colaborador_rh(cliente, bd, bd_login)
                 else:
-                    conta_cliente(cliente)
+                    conta_cliente(cliente, bd_login)
             else:
                 print('\nSenha incorreta.')
                 time.sleep(2)
         else:
             print('Este login não está cadastrado.')
             time.sleep(2)
+        with open('banco_de_dados.txt', 'w') as arq:
+            for key in bd.keys():
+                arq.write(key)
+                arq.write('\n')
+        bd_login.remove('')
+        with open('banco_de_dados.pickle', 'wb') as arq:
+            for key in bd_login:
+                pickle.dump(bd[key], arq)
     elif a == '2':
         clear()
         break
+
+with open('banco_de_dados.txt', 'w') as arq:
+    for key in bd.keys():
+        arq.write(key)
+        arq.write('\n')
+bd_login.remove('')
+with open('banco_de_dados.pickle', 'wb') as arq:
+    for key in bd_login:
+        pickle.dump(bd[key], arq)
