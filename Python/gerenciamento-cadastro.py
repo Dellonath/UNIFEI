@@ -5,31 +5,12 @@ Este é um sistema de cadastro de pessoas pra uma certa festa sem restrições d
 # necessário para clear() (limpar terminal) e sys.exit() (encerrar o programa)
 import os # clear()
 import sys #sys.exit()
-from csv import DictReader
+from csv import DictReader, writer
 
-#inicio do programa
-clear = lambda: os.system('clear') # procedimento para clear()
-
+clear = lambda: os.system('clear') # função para clear()
 # criando um dicionário com as pessoas da festa e contadores de dados
 pessoas = {}
 dados = {}.fromkeys('mulheres homens maioridade vip camarote pista'.split(), 0) # criando um dicionário com as palavras como key e todas com valor 0
-
-with open('cadastros.csv') as arquivo: # recuperando dados em arquivo csv
-    leitor_csv = DictReader(arquivo)
-    for arq in leitor_csv:
-        pessoas[int(arq['cpf'])] = [arq['nome'].upper(), arq['idade'].upper(), arq['sexo'].upper(), arq['ingresso'].upper()]
-        if int(arq['idade']) >= 18:
-            dados['maioridade'] += 1
-        if arq['sexo'] == 'M':
-            dados['homens'] += 1
-        elif arq['sexo'] == 'F':
-            dados['mulheres'] += 1
-        if arq['ingresso'] == 'VIP':
-            dados['vip'] += 1
-        elif arq['ingresso'] == 'CAMAROTE':
-            dados['camarote'] += 1
-        elif arq['ingresso'] == 'PISTA':
-            dados['pista'] += 1
 
 # método de cadastro
 def cadastrar():
@@ -40,14 +21,16 @@ def cadastrar():
         idade = int(input('Digite a idade: '))
         sexo = input('Digite o sexo: ')
         ingresso = input('Digite o tipo de ingresso (vip, camarote ou pista): ')
-        clear()
+        clear() 
 
         # confirmação de dados e reiteração do método, se desejado
         print(f'Nome: {nome.upper()}\nCPF: {cpf}\nIdade: {idade} anos\nSexo: {sexo.upper()}\nTipo de Ingresso: {ingresso.upper()}')        
         escolha = input('Deseja cadastrar (s/n)? ')
         if escolha == 's':
             pessoas[cpf] = [nome.upper(), idade, sexo.upper(), ingresso.upper()]
-
+            with open('cadastros.csv', 'a') as arquivo: # adicionando dados à cadastros.csv
+                escritor_csv = writer(arquivo)
+                escritor_csv.writerow([nome.upper(), cpf, sexo.upper(), idade, ingresso.upper()])  
             # recolhendo dados necessário para consulta posterior
             if idade >= 18:
                 dados['maioridade'] += 1
@@ -82,7 +65,7 @@ def deletar():
             print(f'Nome: {pessoas[cpf][0]}\nCPF: {cpf}\nIdade: {pessoas[cpf][1]}\nSexo: {pessoas[cpf][2]}\nTipo de Ingresso: {pessoas[cpf][3]}\n')
             escolha = input('Deseja mesmo excluir esta pessoa (s/n)? ')
             if escolha == 's':
-                if pessoas[cpf][1] >= 18:
+                if int(pessoas[cpf][1]) >= 18:
                     dados['maioridade'] -= 1
                 if pessoas[cpf][2] == 'M':
                     dados['homens'] -= 1
@@ -106,7 +89,6 @@ def deletar():
             if escolha == 'n':
                 input('Sessão de deleção encerrada com sucesso. Pressione Enter.')
                 break
-
 def alterar():
     clear()
     while True:
@@ -182,6 +164,29 @@ def consultar():
             input('Este CPF não consta no cadastro. Pressione Enter.')
 
 # programa principal
+
+try:
+    with open('cadastros.csv') as arquivo: # recuperando dados em arquivo csv, caso o arquivo não exista, ele o cria com cabeçalho
+        leitor_csv = DictReader(arquivo)
+        for arq in leitor_csv:
+            pessoas[int(arq['cpf'])] = [arq['nome'].upper(), arq['idade'].upper(), arq['sexo'].upper(), arq['ingresso'].upper()]
+            if int(arq['idade']) >= 18:
+                dados['maioridade'] += 1
+            if arq['sexo'] == 'M':
+                dados['homens'] += 1
+            elif arq['sexo'] == 'F':
+                dados['mulheres'] += 1
+            if arq['ingresso'] == 'VIP':
+                dados['vip'] += 1
+            elif arq['ingresso'] == 'CAMAROTE':
+                dados['camarote'] += 1
+            elif arq['ingresso'] == 'PISTA':
+                dados['pista'] += 1
+except:
+    with open('cadastros.csv', 'w') as arquivo: # criando arquivo com cabeçalho
+        escritor_csv = writer(arquivo)
+        escritor_csv.writerow(['nome', 'cpf', 'sexo', 'idade', 'ingresso'])
+
 while True: # loop infito para retorno do painel principal
     clear()
     print('Bem vindo, ao gerenciamento de pessoas ao evento XYZ.')
@@ -195,6 +200,11 @@ while True: # loop infito para retorno do painel principal
     elif escolha == 4:
         consultar()
     elif escolha == 5:
+        with open('cadastros.csv', 'w') as arquivo: # atualiza o arquivo csv
+            escritor_csv = writer(arquivo)
+            escritor_csv.writerow(['nome', 'cpf', 'sexo', 'idade', 'ingresso'])
+            for i in pessoas.keys():
+                escritor_csv.writerow([pessoas[i][0], i, pessoas[i][2], pessoas[i][1], pessoas[i][3]])    
         print(pessoas)
         sys.exit() # mantido aqui para fins didáticos, mas ele é completamente desnecessário, retirá-lo implica no mesmo resultado
     else:
