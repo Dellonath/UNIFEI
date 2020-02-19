@@ -5,6 +5,7 @@ Este é um sistema de cadastro de pessoas pra uma certa festa sem restrições d
 # necessário para clear() (limpar terminal) e sys.exit() (encerrar o programa)
 import os # clear()
 import sys #sys.exit()
+from csv import DictReader
 
 #inicio do programa
 clear = lambda: os.system('clear') # procedimento para clear()
@@ -12,6 +13,23 @@ clear = lambda: os.system('clear') # procedimento para clear()
 # criando um dicionário com as pessoas da festa e contadores de dados
 pessoas = {}
 dados = {}.fromkeys('mulheres homens maioridade vip camarote pista'.split(), 0) # criando um dicionário com as palavras como key e todas com valor 0
+
+with open('cadastros.csv') as arquivo: # recuperando dados em arquivo csv
+    leitor_csv = DictReader(arquivo)
+    for arq in leitor_csv:
+        pessoas[int(arq['cpf'])] = [arq['nome'].upper(), arq['idade'].upper(), arq['sexo'].upper(), arq['ingresso'].upper()]
+        if int(arq['idade']) >= 18:
+            dados['maioridade'] += 1
+        if arq['sexo'] == 'M':
+            dados['homens'] += 1
+        elif arq['sexo'] == 'F':
+            dados['mulheres'] += 1
+        if arq['ingresso'] == 'VIP':
+            dados['vip'] += 1
+        elif arq['ingresso'] == 'CAMAROTE':
+            dados['camarote'] += 1
+        elif arq['ingresso'] == 'PISTA':
+            dados['pista'] += 1
 
 # método de cadastro
 def cadastrar():
@@ -177,6 +195,8 @@ while True: # loop infito para retorno do painel principal
     elif escolha == 4:
         consultar()
     elif escolha == 5:
+        print(pessoas)
         sys.exit() # mantido aqui para fins didáticos, mas ele é completamente desnecessário, retirá-lo implica no mesmo resultado
     else:
         input('Digite uma das opções acima. Pressione Enter.')
+
