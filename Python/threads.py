@@ -31,10 +31,7 @@ class Th(Thread):
             for i in range(self.num, self.num2):
                 if lista[i] == 'a':
                     self.cont += 1
-        @property
-        def qtd(self):
-            return self.cont
-
+                    
 def caso_thread():
     
     global lista
