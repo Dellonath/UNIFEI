@@ -252,37 +252,42 @@ int main(){
 
 // Complexidade O(n!)
 // pega uma string e exibe todas as permutações possíveis
-#include <stdio.h> 
-#include <string.h> 
-
-void swap(char *x, char *y) 
+void troca(char *x, char *y) 
 { 
     char temp; 
     temp = *x; 
     *x = *y; 
     *y = temp; 
 } 
+/* Função para trocar duas variáveis */
 
-void permute(char *a, int l, int r) 
+
+void permutar(char *a, int l, int r) 
 { 
    int i; 
-   if (l == r) 
-     printf("%s\n", a); 
-   else
-   { 
+   //if (l == r) 
+     //printf("%s\n", a); 
+   //else
+   //{ 
        for (i = l; i <= r; i++) 
        { 
-          swap((a+l), (a+i)); 
-          permute(a, l+1, r); 
-          swap((a+l), (a+i)); 
+          troca((a+l), (a+i)); 
+          permutar(a, l+1, r); 
+          troca((a+l), (a+i)); 
        } 
-   } 
+   //} 
 } 
+/* Função para imprimir todas as permutações da string
+   Utiliza 3 parâmetros:
+   1. String 
+   2. Posição inicial da string
+   3. Posição final da string. */
+
   
 int main() 
 { 
     char str[] = "ABCDE"; 
     int n = strlen(str); 
-    permute(str, 0, n-1);
+    permutar(str, 0, n-1); 
     return 0; 
-}
+} 
