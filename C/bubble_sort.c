@@ -1,29 +1,29 @@
+/*
+This algorithm orders a int vector with n elements drawn using Bubble Sort by recurrence
+Created by: Douglas Oliveira
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
-This algorithm orders a int vector with n elements drawn using Bubble Sort by recurrence.
-*/
-
-void bubble_sort(int v[], int n, int i, int j){
+void bubble_sort(int v[], int n, int i){
     
-    if(j != n){
-        if(v[i] > v[j]){ // verify and swap the elements
+    if(i + 1 != n){
+        if(v[i] > v[i + 1]){ // verify and swap the elements
             int aux;
             aux = v[i];
-            v[i] = v[j];
-            v[j] = aux;
-            bubble_sort(v, n, 0, 1); // returns to position 0
+            v[i] = v[i + 1];
+            v[i + 1] = aux;
+            bubble_sort(v, n, 0); // returns to position 0
         }else{
-            bubble_sort(v, n, i + 1, j + 1); // forward
+            bubble_sort(v, n, i + 1); // forward
         } 
-    }else{
-        return ;
     }
 }
 
 void main(){
-    int *v, valor, n;
+    int *v, n;
+    
     printf("Write the size of vector: ");
     scanf("%d", &n);
     
@@ -37,11 +37,10 @@ void main(){
         printf("%d ", v[i]); // print the vector before the bubble sort
     }
     
-    bubble_sort(v, n, 0, 1);
+    bubble_sort(v, n, 0);
     
     printf("\n");
     for(int i = 0;i < n; i++){
         printf("%d ", v[i]); // print the vector after the bubble sort
     }
 }
-
