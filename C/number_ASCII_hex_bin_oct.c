@@ -47,3 +47,13 @@ int main(){
         binary(a[i]);
     }
 }
+
+
+/* 
+Write how many digits are in the number (with positive or negative signal: 3                                                                             
+Digit the number: +12                                                                                                                                    
+                                                                                                                                                         
+DECIMAL: +   ASCII: 43    HEXADECIMAL: 2b    OCTAL: 53    BINARY (Two's Compl.):  00101100                                                                
+DECIMAL: 1   ASCII: 49    HEXADECIMAL: 31    OCTAL: 61    BINARY (Two's Compl.):  01110100                                                                
+DECIMAL: 2   ASCII: 50    HEXADECIMAL: 32    OCTAL: 62    BINARY (Two's Compl.):  10110100
+*/
