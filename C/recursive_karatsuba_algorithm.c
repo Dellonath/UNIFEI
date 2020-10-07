@@ -1,6 +1,3 @@
-// douglas raimundo de oliveira silva 11
-// anderson leandro dos reis 11
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
