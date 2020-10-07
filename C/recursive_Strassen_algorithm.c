@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+// multiplicador recursivo de matrizes grandes
+
 typedef struct t_pixel
 {
     int r, g, b;
