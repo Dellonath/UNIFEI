@@ -1,0 +1,817 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"getNome"
+			],
+			[
+				"Disc",
+				"Disciplina"
+			],
+			[
+				"Limi",
+				"LimiteConsultaEstudantes"
+			],
+			[
+				"cons",
+				"consultaTurmas"
+			],
+			[
+				"consu",
+				"Consulta"
+			],
+			[
+				"bot",
+				"botaoLimpar"
+			],
+			[
+				"bo",
+				"botaoInput"
+			],
+			[
+				"la",
+				"labelStatus"
+			],
+			[
+				"labe",
+				"labelNomeAluno"
+			],
+			[
+				"fram",
+				"frameValores"
+			],
+			[
+				"fra",
+				"frameValores"
+			],
+			[
+				"vende",
+				"vendedor"
+			],
+			[
+				"id",
+				"idProjeto"
+			],
+			[
+				"idC",
+				"idCidadao"
+			],
+			[
+				"data",
+				"data_fim"
+			],
+			[
+				"f",
+				"FOREIGN"
+			],
+			[
+				"prin",
+				"printar"
+			],
+			[
+				"print",
+				"printf\tprintf …"
+			],
+			[
+				"pr",
+				"printf\tprintf …"
+			],
+			[
+				"se",
+				"selectionR"
+			],
+			[
+				"spl",
+				"split_l"
+			],
+			[
+				"sin",
+				"singledigit"
+			],
+			[
+				"s",
+				"shift"
+			],
+			[
+				"R",
+				"R_S"
+			],
+			[
+				"P",
+				"P_Q"
+			],
+			[
+				"pri",
+				"print"
+			],
+			[
+				"mi",
+				"min_value"
+			],
+			[
+				"max",
+				"max_value"
+			],
+			[
+				"mena",
+				"mean_value"
+			],
+			[
+				"men",
+				"mean_value"
+			],
+			[
+				"mean",
+				"mean_value"
+			],
+			[
+				"arg",
+				"argv"
+			],
+			[
+				"int",
+				"interative"
+			],
+			[
+				"A",
+				"A"
+			],
+			[
+				"kar",
+				"karatsuba_base"
+			],
+			[
+				"m",
+				"m"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"sing",
+				"singledigit"
+			],
+			[
+				"si",
+				"sizeof"
+			],
+			[
+				"in",
+				"interative"
+			],
+			[
+				"t",
+				"time1"
+			],
+			[
+				"proce",
+				"process"
+			],
+			[
+				"sen",
+				"sen"
+			],
+			[
+				"ar",
+				"argv"
+			],
+			[
+				"singl",
+				"single_multi"
+			],
+			[
+				"shi",
+				"shift"
+			],
+			[
+				"fun",
+				"func2"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"pi",
+				"pid_filho"
+			],
+			[
+				"res",
+				"res"
+			],
+			[
+				"std",
+				"stdio.h\tstandard header"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"tra",
+				"tradicional_multi"
+			],
+			[
+				"su",
+				"sum"
+			],
+			[
+				"sh",
+				"shift_r"
+			],
+			[
+				"sfi",
+				"shift_r"
+			],
+			[
+				"mu",
+				"tradicional_multi"
+			],
+			[
+				"pid",
+				"pidfilho"
+			],
+			[
+				"st",
+				"stdio.h\tstandard header"
+			],
+			[
+				"bl",
+				"block_size"
+			],
+			[
+				"len",
+				"lenght"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main.py",
+			"settings":
+			{
+				"buffer_size": 3048,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "estudante.py",
+			"settings":
+			{
+				"buffer_size": 5158,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "disciplina.py",
+			"settings":
+			{
+				"buffer_size": 5205,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "turma.py",
+			"settings":
+			{
+				"buffer_size": 6220,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/dellonath/Desktop/tk.py",
+		"/home/dellonath/Desktop/tk06.py",
+		"/home/dellonath/Desktop/teste.py",
+		"/home/dellonath/Desktop/EP10.c",
+		"/home/dellonath/Desktop/dir2.c",
+		"/home/dellonath/Desktop/dir.C",
+		"/home/dellonath/Desktop/kosaraju.c",
+		"/home/dellonath/Desktop/script_escola.sql",
+		"/home/dellonath/Desktop/asd.sql",
+		"/home/dellonath/Desktop/qsqs.py",
+		"/home/dellonath/Desktop/2019018540.py",
+		"/home/dellonath/Desktop/P1.py",
+		"/home/dellonath/Desktop/class Curso.py",
+		"/home/dellonath/Desktop/tete.sql",
+		"/home/dellonath/Desktop/trab09.py",
+		"/home/dellonath/Desktop/orcamento_participativo_DB.sql",
+		"/home/dellonath/Desktop/teste.sql",
+		"/home/dellonath/Desktop/selecao.c",
+		"/home/dellonath/Desktop/seleca_teste.c",
+		"/home/dellonath/Desktop/selecao_2.c",
+		"/home/dellonath/Desktop/asdasd.sql",
+		"/home/dellonath/Desktop/selecao (1).c",
+		"/home/dellonath/Desktop/EP05.c",
+		"/home/dellonath/Desktop/11.c",
+		"/home/dellonath/Desktop/karatsuba.c",
+		"/home/dellonath/Desktop/Strassen.c",
+		"/home/dellonath/Desktop/Strassen_nofile.c",
+		"/home/dellonath/Desktop/trabalho_07.py",
+		"/home/dellonath/Desktop/LE06_30.c",
+		"/home/dellonath/Desktop/LE06_28.c",
+		"/home/dellonath/Desktop/LE06_27.c",
+		"/home/dellonath/Desktop/LE06_19.c",
+		"/home/dellonath/Desktop/LE06_18.c",
+		"/home/dellonath/Desktop/LE06_17.c",
+		"/home/dellonath/Desktop/LE06_16.c",
+		"/home/dellonath/Desktop/LE06_29.c",
+		"/home/dellonath/Desktop/LE06_15.c",
+		"/home/dellonath/Desktop/Slide15.c",
+		"/home/dellonath/Desktop/29_corrigido.c",
+		"/home/dellonath/Desktop/28.c",
+		"/home/dellonath/Desktop/exe_slide_27.c",
+		"/home/dellonath/Desktop/Slide20.c",
+		"/home/dellonath/Desktop/slide18.c",
+		"/home/dellonath/Desktop/Slide17.c",
+		"/home/dellonath/Desktop/Slide16.c",
+		"/home/dellonath/Desktop/ExSlide30.c",
+		"/home/dellonath/Desktop/test.c",
+		"/test.c",
+		"/home/dellonath/Desktop/multiplicacao_antigo.c",
+		"/home/dellonath/Desktop/multiplicacao_vito2.c",
+		"/home/dellonath/Desktop/multiplicacao_vito.c",
+		"/home/dellonath/Desktop/11 (5).c",
+		"/home/dellonath/Desktop/11 (8).c",
+		"/home/dellonath/Desktop/11 (7).c",
+		"/home/dellonath/Desktop/11 (6).c",
+		"/home/dellonath/Desktop/11 (4).c",
+		"/home/dellonath/Desktop/11 (3).c",
+		"/home/dellonath/Desktop/11 (2).c",
+		"/home/dellonath/Desktop/11 (1).c",
+		"/home/dellonath/Desktop/multiplicacao.c",
+		"/home/dellonath/Desktop/multiplicacao_2.c",
+		"/home/dellonath/Desktop/retornado.c",
+		"/home/dellonath/Desktop/multiplicacao_hokama.c",
+		"/home/dellonath/Desktop/multiplicacao (1).c",
+		"/home/dellonath/Desktop/trabalho06_2019018540.py",
+		"/home/dellonath/Desktop/ep04.c",
+		"/home/dellonath/Desktop/Trabalho_05_2019018540.py",
+		"/home/dellonath/Desktop/Trabalho 05 - 2017005866.py",
+		"/home/dellonath/Desktop/quase_la.c",
+		"/home/dellonath/Desktop/EP03.c",
+		"/home/dellonath/Desktop/TSP.py",
+		"/home/dellonath/Desktop/asd.c",
+		"/home/dellonath/Desktop/academico1.py",
+		"/EP03.c",
+		"/home/dellonath/Desktop/EP02-processos.c",
+		"/home/dellonath/Desktop/CIC110-Trabalho01.c",
+		"/home/dellonath/Desktop/EP02-sequencial.c",
+		"/home/dellonath/Desktop/EP02.c",
+		"/home/dellonath/Desktop/bignumber.cpp",
+		"/home/dellonath/Desktop/retornado_m.c",
+		"/home/dellonath/Desktop/mult_mat.c",
+		"/home/dellonath/Desktop/mm.c",
+		"/home/dellonath/Desktop/bar.ppm",
+		"/home/dellonath/Desktop/p3-0",
+		"/home/dellonath/Desktop/xx.ppm",
+		"/home/dellonath/Desktop/WhatsApp-Image-2020-09-12-at-14.07.05.ppm",
+		"/home/dellonath/Desktop/exe-04.c",
+		"/home/dellonath/Desktop/Lista 04.c",
+		"/home/dellonath/Desktop/EP01-exe1.c",
+		"/home/dellonath/Desktop/pp.jpeg",
+		"/home/dellonath/Desktop/Unconfirmed 999691.crdownload",
+		"/home/dellonath/Desktop/teste2.c",
+		"/home/dellonath/Desktop/a.c",
+		"/home/dellonath/Desktop/b.c",
+		"/home/dellonath/Desktop/c.c",
+		"/home/dellonath/Desktop/teste.c",
+		"/home/dellonath/Desktop/M-n101-k10.csv",
+		"/home/dellonath/Desktop/M-n101-k102.csv",
+		"/home/dellonath/Desktop/M-n101-k10.vrp",
+		"/home/dellonath/Desktop/multiplicacao_comentado.c",
+		"/home/dellonath/Desktop/multiplicacao_comentado.c.",
+		"/home/dellonath/Desktop/test.py",
+		"/home/dellonath/Desktop/Trabalho 00.c",
+		"/home/dellonath/Desktop/Trabalho 00.py",
+		"/home/dellonath/Desktop/Trabalho 00",
+		"/home/dellonath/Desktop/Trabalho 1 - 2019018540.py",
+		"/home/dellonath/Desktop/Trabalho 01 - 2017005866.py",
+		"/home/dellonath/Desktop/TRabalho 1 - 2019018540",
+		"/home/dellonath/Desktop/edo.py",
+		"/home/dellonath/Desktop/train.csv",
+		"/home/dellonath/Desktop/test.csv",
+		"/home/dellonath/Desktop/mt_data_reader.py",
+		"/home/dellonath/Desktop/Contas_Despesas_2020.csv",
+		"/home/dellonath/Desktop/Contas_Despesas_2019.csv",
+		"/home/dellonath/Desktop/Contas_Despesas_2018.csv",
+		"/home/dellonath/Desktop/Contas_Despesas_2017_2020.csv",
+		"/home/dellonath/Desktop/Contas_Despesas_2017.csv",
+		"/home/dellonath/Desktop/EP07.asm",
+		"/home/dellonath/Desktop/teste.asm",
+		"/home/dellonath/Desktop/COVID19_MPLRegressor/data/HIST_PAINEL_COVIDBR_15jul2020.xlsx",
+		"/home/dellonath/Desktop/EP06.asm",
+		"/home/dellonath/Desktop/COVID19_MPLRegressor/data/owid-covid-data.csv",
+		"/home/dellonath/Desktop/EP04 - 2.asm",
+		"/home/dellonath/Desktop/EP04 - 1.asm",
+		"/home/dellonath/Desktop/EP05b.asm",
+		"/home/dellonath/Desktop/EP05a.asm",
+		"/home/dellonath/Desktop/EP02.asm",
+		"/home/dellonath/Desktop/EP03.pdf"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"----",
+			"LimConsultaDisciplinas",
+			"LimConsulta",
+			"CtrlEstudante",
+			"tf",
+			"tam",
+			"acesso",
+			"criacao",
+			"oculto",
+			"sistema",
+			"nome",
+			"extensao",
+			"contaLinha",
+			"hidden",
+			"tamanho",
+			"contador",
+			"tamanho",
+			"extensao",
+			"\t",
+			"label1",
+			"foreign key",
+			"unique",
+			"sequence",
+			"primary key",
+			"CHECK",
+			"NOT NULL",
+			"int",
+			"INSERT INTO",
+			"values",
+			"default",
+			"table",
+			"create",
+			"getCode",
+			"MOSTRAR",
+			"printar",
+			"passeia",
+			"Passageiro",
+			"passeia",
+			"carrinho",
+			"rodando",
+			"passageiro",
+			"andando",
+			"argument",
+			"giveup_haircut",
+			"cortando_Cabelo",
+			"get_haircut",
+			"cliente_arrived",
+			"cut_hair",
+			"customer",
+			"barber",
+			"Processo_B",
+			"Processo_A",
+			"Processo_B",
+			"Processo_A",
+			"Processo_B",
+			"Processo_A",
+			"threadB",
+			"threadA",
+			"threads",
+			"calculo",
+			"cons1",
+			"prod1",
+			"cons1",
+			"prod1",
+			"shiftarDireita",
+			"splitL",
+			"splitR",
+			"P",
+			"max",
+			"m",
+			"Kaux",
+			"Zaux",
+			"direita_shift",
+			"max",
+			"soma",
+			"traditional_mult",
+			"shift_r",
+			"copy",
+			"sum",
+			"copy",
+			"split_r",
+			"split_l",
+			"subtract",
+			"*/",
+			"4*m",
+			"K1",
+			"exit(0);",
+			"exit()",
+			"2*(m+2)",
+			"2*m",
+			"2*(m+1)",
+			"2*(m+2)",
+			"2*(m+1)",
+			"4*m",
+			"2*(m+1)",
+			"3*m",
+			"*S",
+			"*R",
+			"*Q",
+			"*P",
+			"way",
+			"subtrai",
+			"P",
+			"\t",
+			"tradicional_multi",
+			"subtrai",
+			"traditiona_mult",
+			"tradicional_multi",
+			"subtrai",
+			"4a",
+			"4",
+			"vq",
+			",,",
+			"\t",
+			"\"Total\"\n",
+			"\"Total\",\"\",\"=SUM(C2:C597)\",\"=SUM(D2:D597)\",\"=SUM(E2:E597)\",\"=SUM(F2:F597)\",\"=SUM(G2:G597)\"\n",
+			"Tamanho",
+			"fig",
+			"energy"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"asd"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3048,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2192,
+								2192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "estudante.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5158,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3440,
+								3440
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1424.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "disciplina.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5205,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4147,
+								4147
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1680.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "turma.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6220,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4881,
+								4881
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1859.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "main.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Desktop/retornado.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
