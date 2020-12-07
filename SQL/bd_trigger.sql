@@ -311,4 +311,15 @@ $$ LANGUAGE plpgsql;
 -- Trigger só é ativado se haver alteração na coluna 'data_retorno' de Empresta 
 CREATE TRIGGER devolvelivro2 AFTER UPDATE OF data_retorno ON empresta 
 	FOR EACH ROW EXECUTE PROCEDURE devolvelivro2();
+	
+	
+CREATE MATERIALIZED VIEW emprestimolivroaluno AS SELECT
+Aluno.nome_Aluno AS "Aluno", Livro.titulo_Livro AS "Livro", Emp.data_Prev
+ista AS "Previsao entrega", Emp.data_Retorno AS "Data de Retorno", Emp.mu
+lta AS "Multa"
+FROM Empresta AS Emp
+	INNER JOIN Livro AS Livro
+		ON livro.isbn_Livro = Emp.isbn_Empresta
+	INNER JOIN Aluno AS Aluno
+		ON Aluno.matric_Aluno = Emp.matricAluno_Empresta;
 
